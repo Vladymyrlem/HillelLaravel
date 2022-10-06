@@ -17,7 +17,22 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'user_id' => 1,
+            'category_id' => 1,
+            'title' => fake()->text(rand(100, 200)),
+            'body' => fake()->text(rand(150, 400)),
         ];
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     *
+     * @return static
+     */
+    public function unverified()
+    {
+        return $this->state(fn(array $attributes) => [
+            'email_verified_at' => null,
+        ]);
     }
 }
