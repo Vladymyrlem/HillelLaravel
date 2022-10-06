@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +13,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('posts/index');
 });
+Route::get('/author/{authorId}', [UserController::class, 'index']);
+Route::get('/author/{authorId}/category/{categoryId}', [UserController::class, 'category']);
+
+Route::get('/category/{categoryId}', [CategoryController::class, 'index']);
