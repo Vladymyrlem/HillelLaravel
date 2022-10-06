@@ -18,15 +18,20 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
+                        <li><a href="{{ route('page.about') }}" class="text-white">About</a></li>
+                    </ul>
                     <ul class="navbar-nav">
+
                         <li class="nav-item">
-                            <a class="nav-link active" style="width: 100%" href="/categories">Categories</a>
+                            <a href="{{ route('home') }}" class="text-white">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="width: 100%" href="/tags">Tags</a>
+                            <a class="nav-link" href="{{ route('categories.index') }}" >Categories</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" style="width: 100%" href="/posts">Posts</a>
+                            <a class="nav-link" href="{{ route('author.index') }}" >Categories</a>
                         </li>
                     </ul>
                 </div>
@@ -34,8 +39,6 @@
         </nav>
     @show()
 </header>
-@yield('breadcrumbs')
-
 @yield('content')
 
 

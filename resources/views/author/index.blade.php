@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Category Page
+    Author Page
 @endsection
 
 @section('content')
@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         @php($index = 1)
-        @foreach($categories->posts as $post)
+        @foreach($author->posts as $post)
 
             <tr>
                 <th scope="row">{{ $index++ }}</th>
