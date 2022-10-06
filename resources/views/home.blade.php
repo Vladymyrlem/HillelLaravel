@@ -4,7 +4,6 @@
 
 @section('content')
     <h1>Home Page</h1>
-@endsection
 @isset($_SESSION['success'])
     <div class="alert alert-info" role="alert">
         {{   $_SESSION['success']  }}
@@ -39,3 +38,4 @@
     @endforeach
     </tbody>
 </table>
+@endsection
