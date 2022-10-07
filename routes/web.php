@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/author/{authorId}', [UserController::class, 'index']);
+Route::get('/author', [UserController::class, 'index']);
+Route::get('/author/{authorId}', [UserController::class, 'show']);
 Route::get('/author/{authorId}/category/{categoryId}', [UserController::class, 'category']);
-
 Route::get('/category/{categoryId}', [CategoryController::class, 'index']);

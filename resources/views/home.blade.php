@@ -30,8 +30,8 @@
         <tr>
             <th scope="row">{{ $index++ }}</th>
             <th scope="row">{{ $post->title }}</th>
-            <td>{{ $post->users->name }}</td>
-            <td>{{ $post->categories->title }}</td>
+            <td><a href="/author/{{ $post->users->id }}">{{ $post->users->name }}</a></td>
+            <td><a href="/category/{{ $post->categories->id }}">{{ $post->categories->title }}</a></td>
             <td>{{ $post->body }}</td>
             <td>{{ date_create($post->updated_at)->format('Y-m-d') }}</td>
         </tr>

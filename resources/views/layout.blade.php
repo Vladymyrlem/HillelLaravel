@@ -19,15 +19,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-
                         <li class="nav-item">
                             <a href="/" class="text-white">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/categories" >Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/author" >Author</a>
+                            <a class="nav-link" href="/author" >Authors</a>
                         </li>
                     </ul>
                 </div>

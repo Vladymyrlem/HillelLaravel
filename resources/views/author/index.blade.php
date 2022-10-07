@@ -18,28 +18,24 @@
         <thead>
         <tr>
             <th scope="col">Number</th>
-            <th scope="col">Title</th>
             <th scope="col">Author name</th>
-            <th scope="col">Category</th>
-            <th scope="col">Body</th>
+            <th scope="col">Email</th>
             <th scope="col">Created_at</th>
             <th scope="col">Updated_at</th>
+            <th>See Author</th>
         </tr>
         </thead>
         <tbody>
         @php($index = 1)
-        @foreach($author->posts as $post)
+        @foreach($author as $auth)
 
             <tr>
                 <th scope="row">{{ $index++ }}</th>
-                <th>{{ $post->title }}</th>
-                <td>{{ $post->users->name }}</td>
-                <td>{{ $post->categories->title }}</td>
-                <td>{{ $post->body }}</td>
-                <td>{{ $post->created_at }}</td>
-                <td>{{ $post->updated_at }}</td>
-
-            </tr>
+                <th>{{ $auth->name }}</th>
+                <td>{{ $auth->email }}</td>
+                <td>{{ $auth->created_at }}</td>
+                <td>{{ $auth->updated_at }}</td>
+<td><a href="/author/{{ $auth->id }}">Show</a></td>            </tr>
         @endforeach
         </tbody>
     </table>

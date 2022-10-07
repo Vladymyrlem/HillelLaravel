@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Category Page
+    Author Page
 @endsection
 
 @section('content')
@@ -28,13 +28,13 @@
         </thead>
         <tbody>
         @php($index = 1)
-        @foreach($categories->posts as $post)
+        @foreach($author->posts as $post)
 
             <tr>
                 <th scope="row">{{ $index++ }}</th>
                 <th>{{ $post->title }}</th>
                 <td>{{ $post->users->name }}</td>
-                <td>{{ $post->categories->title }}</td>
+                <td id="{{$post->categories->id}}"><a href="/author/{{ $post->users->id }}/category/{{ $post->categories->id }}">{{ $post->categories->title }}</a></td>
                 <td>{{ $post->body }}</td>
                 <td>{{ $post->created_at }}</td>
                 <td>{{ $post->updated_at }}</td>
