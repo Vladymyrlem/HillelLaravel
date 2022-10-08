@@ -35,7 +35,8 @@
                 <td>{{ $auth->email }}</td>
                 <td>{{ $auth->created_at }}</td>
                 <td>{{ $auth->updated_at }}</td>
-<td><a href="/author/{{ $auth->id }}">Show</a></td>            </tr>
+                <td><a href="/author/{{ $auth->id }}">Show</a></td>
+            </tr>
         @endforeach
         </tbody>
     </table>

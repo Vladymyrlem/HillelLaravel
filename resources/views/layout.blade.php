@@ -23,7 +23,7 @@
                             <a href="/" class="text-white">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/author" >Authors</a>
+                            <a class="nav-link" href="/author">Authors</a>
                         </li>
                     </ul>
                 </div>

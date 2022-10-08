@@ -12,6 +12,7 @@ class UserController extends Controller
         $author = User::all();
         return view('author/index', compact('author'));
     }
+
     public function show($authorId)
     {
         $author = User::find($authorId);

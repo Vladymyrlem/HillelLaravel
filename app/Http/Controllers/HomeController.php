@@ -6,7 +6,8 @@ use App\Models\Post;
 
 class HomeController
 {
-    public function index(){
+    public function index()
+    {
         $posts = Post::all();
         return view('home', compact('posts'));
     }
