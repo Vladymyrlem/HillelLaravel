@@ -8,9 +8,15 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index($authorId)
+    public function index()
+    {
+        $categories = Category::all();
+        return view('category/index', compact('categories'));
+    }
+
+    public function show($authorId)
     {
         $categories = Category::find($authorId);
-        return view('category/index', compact('categories'));
+        return view('category/show', compact('categories'));
     }
 }

@@ -25,6 +25,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/author">Authors</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tags">Tags</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/category">Category</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

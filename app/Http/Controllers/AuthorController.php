@@ -12,10 +12,16 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller
 {
 
-    public function index($authorId)
+    public function index()
+    {
+        $author = User::all();
+        return view('author/index', compact('author'));
+    }
+
+    public function show($authorId)
     {
         $author = User::find($authorId);
-        return view('author/index', compact('author'));
+        return view('author/show', compact('author'));
     }
 
     public function category($authorId, $categoryId)

@@ -13,10 +13,16 @@ class TagController extends Controller
     public function index($tagId)
     {
         $tag = Tag::find($tagId);
-        $posts = Post::whereHas('tags', function ($tag) use ($tagId){
+        $posts = Post::whereHas('tags', function ($tag) use ($tagId) {
             $tag->where('tag_id', $tagId);
         })->get();
 
         return view('tag/index', compact('posts', 'tag'));
+    }
+
+    public function list()
+    {
+        $tag = Tag::all();
+        return view('tag/list', compact('tag'));
     }
 }

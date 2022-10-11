@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,20 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+/*Home Page. List Posts*/
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/author', [UserController::class, 'index']);
-Route::get('/author/{authorId}', [UserController::class, 'show']);
-Route::get('/author/{authorId}/category/{categoryId}', [UserController::class, 'category']);
-Route::get('/category/{categoryId}', [CategoryController::class, 'index']);
+
+/*Author routers group*/
+Route::get('/author', [AuthorController::class, 'index'])->name('author');
+Route::get('/author/{authorId}', [AuthorController::class, 'show']);
+Route::get('/author/{authorId}/category/{categoryId}', [AuthorController::class, 'category'])->name('authorCategory');
+Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorController::class, 'categoryTag'])->name('authorCategoryTag');
+
+/*Category Router*/
+Route::get('/category', [CategoryController::class, 'index'])->name('category');
+Route::get('/category/{categoryId}', [CategoryController::class, 'show']);
+
+/*Tag Router*/
+Route::get('/tags', [TagController::class, 'list']);
+Route::get('/tag/{tagId}', [TagController::class, 'index'])->name('tag');
+

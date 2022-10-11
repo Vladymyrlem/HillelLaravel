@@ -18,7 +18,9 @@
         <thead>
         <tr>
             <th scope="col">Number</th>
-            <th scope="col">Title</th>
+            <th scope="col">Post Title</th>
+            <th scope="col">Author name</th>
+            <th scope="col">Category</th>
             <th scope="col">Body</th>
             <th scope="col">Created_at</th>
             <th scope="col">Updated_at</th>
@@ -26,14 +28,16 @@
         </thead>
         <tbody>
         @php($index = 1)
-        @foreach($categories as $cat)
+        @foreach($categories->posts as $post)
 
             <tr>
-                <th scope="row">{{ $cat->id }}</th>
-                <th><a href="category/{{ $cat->id }}">{{ $cat->title }}</a></th>
-                <td>{{ $cat->slug }}</td>
-                <td>{{ $cat->created_at }}</td>
-                <td>{{ $cat->updated_at }}</td>
+                <th scope="row">{{ $index++ }}</th>
+                <th>{{ $post->title }}</th>
+                <td><a href="/author/{{ $post->users->id }}">{{ $post->users->name }}</a></td>
+                <td>{{ $post->categories->title }}</td>
+                <td>{{ $post->body }}</td>
+                <td>{{ $post->created_at }}</td>
+                <td>{{ $post->updated_at }}</td>
             </tr>
         @endforeach
         </tbody>

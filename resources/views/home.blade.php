@@ -20,6 +20,7 @@
             <th scope="col">Author name</th>
             <th scope="col">Category</th>
             <th scope="col">Body</th>
+            <th scope="col">tag Title</th>
             <th scope="col">Updated_at</th>
         </tr>
         </thead>
@@ -30,9 +31,16 @@
             <tr>
                 <th scope="row">{{ $post->id }}</th>
                 <th scope="row">{{ $post->title }}</th>
-                <td><a href="/author/{{ $post->users->id }}">{{ $post->users->name }}</a></td>
-                <td><a href="/category/{{ $post->categories->id }}">{{ $post->categories->title }}</a></td>
+                <td><a href="{{ route('author', $post->users->id)  }}">{{ $post->users->name }}</a></td>
+                <td><a href="{{ route('category', $post->categories->id)  }}">{{ $post->categories->title }}</a></td>
                 <td>{{ $post->body }}</td>
+                <td>@forelse($post->tags as $tag)
+                        <a style="color: dodgerblue; text-decoration: none" href="{{ route('tag', $tag->id)  }}">
+                            {!!  htmlspecialchars($tag->title, ENT_QUOTES) .'<br>' !!}
+                        </a>
+                    @empty
+                            <?php echo 'Tag not found'; ?>
+                    @endforelse</td>
                 <td>{{ date_create($post->updated_at)->format('Y-m-d') }}</td>
             </tr>
         @endforeach
