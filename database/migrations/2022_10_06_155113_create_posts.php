@@ -20,6 +20,8 @@ return new class extends Migration {
             $table->text('body');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
@@ -30,6 +32,7 @@ return new class extends Migration {
      */
     public function down()
     {
+        Schema::dropIfExists('post2tag');
         Schema::dropIfExists('posts');
     }
 };
