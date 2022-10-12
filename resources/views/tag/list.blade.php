@@ -19,8 +19,6 @@
         <tr>
             <th scope="col">Number</th>
             <th scope="col">Title</th>
-            <th scope="col">Author name</th>
-            <th scope="col">Tag</th>
             <th scope="col">Slug</th>
             <th scope="col">Created_at</th>
             <th scope="col">Updated_at</th>
@@ -30,7 +28,7 @@
         @foreach($tags as $tag)
             <tr>
                 <th scope="row">{{ $tag->id }}</th>
-                <th>{{ $tag->title }}</th>
+                <th><a href="{{route('tag',['tagId' => $tag->id])}}">{{ $tag->title }}</a></th>
                 <td>{{ $tag->slug }}</td>
                 <td>{{ $tag->created_at }}</td>
                 <td>{{ $tag->updated_at }}</td>
