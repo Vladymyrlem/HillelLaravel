@@ -22,7 +22,7 @@ class TagController extends Controller
 
     public function list()
     {
-        $tag = Tag::all();
-        return view('tag/list', compact('tag'));
+        $tags = Tag::all();
+        return view('tag/list', compact('tags'));
     }
 }
