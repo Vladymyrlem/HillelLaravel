@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         });
 
         $posts->each(function ($post) use ($tags) {
-            $post->tags()->attach($tags->random(rand(5,10))->pluck('id'));
+            $post->tags()->attach($tags->random(rand(5, 10))->pluck('id'));
             $post->save();
         });
     }
