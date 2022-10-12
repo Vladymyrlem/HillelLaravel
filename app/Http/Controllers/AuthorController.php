@@ -21,7 +21,7 @@ class AuthorController extends Controller
     public function show($authorId)
     {
         $author = User::find($authorId);
-        return view('author/show', compact('author'));
+        return view('author/show', ['author' => $author]);
     }
 
     public function category($authorId, $categoryId)

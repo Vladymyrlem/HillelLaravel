@@ -27,7 +27,6 @@
         <tbody>
         @php($index = 1)
         @foreach($categories as $cat)
-
             <tr>
                 <th scope="row">{{ $cat->id }}</th>
                 <th><a href="category/{{ $cat->id }}">{{ $cat->title }}</a></th>

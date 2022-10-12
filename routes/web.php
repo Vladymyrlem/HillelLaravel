@@ -22,13 +22,13 @@ Route::get('/', [HomeController::class, 'index']);
 
 /*Author routers group*/
 Route::get('/author', [AuthorController::class, 'index'])->name('author');
-Route::get('/author/{authorId}', [AuthorController::class, 'show']);
+Route::get('/author/{authorId}', [AuthorController::class, 'show'])->name('author.show');
 Route::get('/author/{authorId}/category/{categoryId}', [AuthorController::class, 'category'])->name('authorCategory');
 Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorController::class, 'categoryTag'])->name('authorCategoryTag');
 
 /*Category Router*/
 Route::get('/category', [CategoryController::class, 'index'])->name('category');
-Route::get('/category/{categoryId}', [CategoryController::class, 'show']);
+Route::get('/category/{categoryId}', [CategoryController::class, 'show'])->name('category.show');
 
 /*Tag Router*/
 Route::get('/tags', [TagController::class, 'list']);

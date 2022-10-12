@@ -29,7 +29,6 @@
         <tbody>
         @php($index = 1)
         @foreach($categories->posts as $post)
-
             <tr>
                 <th scope="row">{{ $index++ }}</th>
                 <th>{{ $post->title }}</th>

@@ -11,7 +11,6 @@ class Tag extends Model
 {
     use SoftDeletes, HasFactory;
 
-
     public function posts()
     {
         return $this->belongsToMany(Post::class, 'post2tag')->withTimestamps();
