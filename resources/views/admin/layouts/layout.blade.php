@@ -6,6 +6,8 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
 </head>
 <body>
 <header>
@@ -18,7 +20,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav w-100">
+                    <ul class="navbar-nav">
                         <li class="nav-item">
                             <a href="/" class="text-white">Home</a>
                         </li>
@@ -30,9 +32,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/category">Category</a>
-                        </li>
-                        <li class="nav-item" style="margin-left: auto; margin-right: 0">
-                            <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
                         </li>
 
                     </ul>

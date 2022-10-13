@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
-
-use App\Models\Category;
 
 class CategoryController extends Controller
 {
-    public function index()
+
+    public function show($slug)
     {
-        $categories = Category::all();
-        return view('category/index', compact('categories'));
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $posts = $category->posts()->orderBy('id', 'desc')->paginate(2);
+        return view('categories.show', compact('category', 'posts'));
     }
 
-    public function show($authorId)
-    {
-        $categories = Category::find($authorId);
-        return view('category/show', compact('categories'));
-    }
 }
