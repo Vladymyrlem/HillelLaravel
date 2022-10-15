@@ -42,6 +42,7 @@
                               enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{ $post->id }}">
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Enter title</label>

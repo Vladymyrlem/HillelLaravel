@@ -26,7 +26,7 @@ class AdminPostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
@@ -51,7 +51,7 @@ class AdminPostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -73,7 +73,7 @@ class AdminPostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -88,8 +88,8 @@ class AdminPostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
@@ -102,7 +102,7 @@ class AdminPostController extends Controller
             'body' => ['required', 'min:2', 'max:255']
         ]);
 
-        $post = Post::find($id);
+        $post = Post::find($request->input('id'));
         $post->update($request->all());
         $post->tags()->sync($request->tags_id);
         return redirect()->route('adminPost')->with('success', 'Изменения сохранены');

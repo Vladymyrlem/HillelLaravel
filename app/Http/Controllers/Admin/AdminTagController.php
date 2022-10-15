@@ -79,7 +79,7 @@ class AdminTagController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
             'id' => ['required'],
@@ -87,7 +87,7 @@ class AdminTagController extends Controller
             'slug' => ['required', 'min:2', 'max:255']
         ]);
 
-        $tag = Tag::find($id);
+        $tag = Tag::find($request->input('id'));
         $tag->update($request->all());
 
         return redirect()->route('adminTag')->with('success', 'Tag updated successfully!');
