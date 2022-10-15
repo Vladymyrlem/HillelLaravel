@@ -102,7 +102,7 @@ class AdminPostController extends Controller
             'body' => ['required', 'min:2', 'max:255']
         ]);
 
-        $post = Post::find($request->input('id'));
+        $post = Post::find($id);
         $post->update($request->all());
         $post->tags()->sync($request->tags_id);
         return redirect()->route('adminPost')->with('success', 'Изменения сохранены');

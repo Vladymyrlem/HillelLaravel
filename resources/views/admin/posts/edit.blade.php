@@ -43,39 +43,88 @@
                             @csrf
                             @method('PUT')
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="title">Title</label>
-                                    <input type="text" name="title"
-                                           class="form-control @error('title') is-invalid @enderror" id="title"
-                                           value="{{ $post->title }}">
+                                <div class="mb-3">
+                                    <label for="title" class="form-label">Enter title</label>
+                                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title')?? $post->title }}" placeholder="Enter title">
+                                    @if($errors->has('title'))
+                                        @foreach($errors->get('title') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="content">Контент</label>
-                                    <textarea name="content" class="form-control @error('content') is-invalid @enderror"
-                                              id="content" rows="7">{{ $post->body }}</textarea>
+
+                                <div class="mb-3">
+                                    <label for="body" class="form-label">Enter body</label>
+                                    <textarea class="form-control" name="body" id="body" cols="30" rows="4">{{ old('body')?? $post->body }}</textarea>
+                                    @if($errors->has('body'))
+                                        @foreach($errors->get('body') as $error)
+                                            <div class="alert alert-danger mt-3" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="category_id">Категория</label>
-                                    <select class="form-control @error('category_id') is-invalid @enderror"
-                                            id="category_id" name="category_id">
-                                        @foreach($categories as $k => $v)
-                                            <option value="{{ $k }}"
-                                                    @if($k == $post->category_id) selected @endif>{{ $v->title }}</option>
+
+                                <div class="mb-3">
+                                    <label for="user_id" class="form-label">Select a author</label>
+                                    <select class="form-select" id="user_id" name="user_id">
+                                        @foreach($users as $user)
+                                            <option {{ old('user_id')?? $post->user_id == $user->id ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
+                                    @if($errors->has('user_id'))
+                                        @foreach($errors->get('user_id') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="tags">Теги</label>
-                                    <select name="tags[]" id="tags" class="select2" multiple="multiple"
-                                            data-placeholder="Выбор тегов" style="width: 100%;">
-                                        @foreach($tags as $k => $v)
-                                            <option value="{{ $k }}"
-                                                    @if(in_array($k, $post->tags->pluck('id')->all())) selected @endif>{{ $v->title }}</option>
+                                <div class="mb-3">
+                                    <label for="category_id" class="form-label">Select a category</label>
+                                    <select class="form-select" id="category_id" name="category_id">
+                                        @foreach($categories as $category)
+                                            <option {{  old('category_id')??$post->category_id == $category->id? 'selected' : '' }} value="{{ $category->id == old('category_id')? old('category_id'): $category->id }}">{{ $category->title }}</option>
                                         @endforeach
                                     </select>
+                                    @if($errors->has('category_id'))
+                                        @foreach($errors->get('category_id') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="tag_id" class="form-label">Select a tag(s) + ctrl</label>
+                                    <select class="form-select" id="tag_id" name="tags_id[]" multiple>
+                                        @foreach($tags as $tag)
+                                            <option
+                                                @if(empty(old('tags_id')))
+                                                    @foreach($post->tags as $tag_id)
+                                                        {{ $tag->id == $tag_id->id? 'selected' : '' }}
+                                                    @endforeach
+                                                @else
+                                                    @foreach(old('tags_id') as $tag_id)
+                                                        {{ $tag->id == $tag_id? 'selected' : '' }}
+                                                    @endforeach
+                                                @endif
+                                                value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('tags_id'))
+                                        @foreach($errors->get('tags_id') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                             <!-- /.card-body -->

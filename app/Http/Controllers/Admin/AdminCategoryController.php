@@ -118,7 +118,7 @@ class AdminCategoryController extends Controller
     public function restore($id)
     {
         Category::withTrashed()->where('id', $id)->restore();
-        return redirect()->route('adminCategoryRestore',['id'=> $id])->with('success', 'Category restored successfully.');
+        return redirect()->route('adminCategoryTrash');
     }
 
     /**

@@ -32,6 +32,7 @@
 
                         <form method="post" action="{{ route('adminTagUpdate', ['tag' => $tag->id]) }}">
                             @csrf
+                            @method('PUT')
                             <input type="hidden" name="id" value="{{ $tag->id }}">
                             <div class="mb-3">
                                 <label for="title" class="form-label">Enter title</label>

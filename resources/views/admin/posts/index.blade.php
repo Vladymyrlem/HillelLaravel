@@ -56,9 +56,7 @@
                                                     {{ $post->users->title }}
                                                 </td>
                                                 <td>@forelse($post->tags as $tag)
-                                                        <a href="{{route('adminTagShow', ['slug' => $tag->id])}}">
                                                         {!! $tag->title . '<br>' !!}
-                                                        </a>
                                                     @empty
                                                         <?php echo 'Tags Not Found';?>
                                                     @endforelse

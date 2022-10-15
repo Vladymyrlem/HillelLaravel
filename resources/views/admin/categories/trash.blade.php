@@ -44,8 +44,10 @@
                 <th scope="row">{{ $category->id }}</th>
                 <td>{{ $category->title }}</td>
                 <td>{{ $category->slug }}</td>
-                <td>{{ $category->posts->pluck('title')->join(', ') }}</td>
-                <td><a href="{{ route('adminCategoryRestore', ['id', $category->id]) }}">RESTORE</a></td>
+                <th>{{ $category->created_at }}</th>
+                <th>{{ $category->updated_at }}</th>
+                <td><a class="btn btn-info" href="{{ route('adminCategoryRestore',['id' => $category->id]) }}">RESTORE</a></td>
+                <td><a class="btn btn-danger" href="{{ route('adminCategoryForceDelete',['id' => $category->id]) }}">X</a></td>
 
             </tr>
         @empty

@@ -52,7 +52,7 @@ Route::get('/admin/tag/delete/{id}', [AdminTagController::class, 'delete'])->nam
 Route::get('/admin/tag/trash', [AdminTagController::class, 'trash'])->name('adminTagTrash');
 Route::get('/admin/tag/restore/{id}', [AdminTagController::class, 'restore'])->name('adminTagRestore');
 Route::get('/admin/tag/forceDelete/{id}', [AdminTagController::class, 'forceDelete'])->name('adminTagForceDelete');
-Route::get('/admin/tags/{slug}', [AdminTagController::class, 'show'])->name('adminTagShow')->whereNumber('slug');
+Route::get('/admin/tags/{id}', [AdminTagController::class, 'show'])->name('adminTagShow');
 
 /*Posts Router*/
 Route::get('/admin/post', [AdminPostController::class, 'index'])->name('adminPost');
