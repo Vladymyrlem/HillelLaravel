@@ -29,14 +29,22 @@
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('categories.store') }}">
+                        <form role="form" method="post" action="{{ route('adminCategoryStore') }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Название</label>
+                                    <label for="title">Title</label>
                                     <input type="text" name="title"
                                            class="form-control @error('title') is-invalid @enderror" id="title"
                                            placeholder="Название">
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="slug">Slug</label>
+                                    <input type="text" name="slug"
+                                           class="form-control @error('slug') is-invalid @enderror" id="slug"
+                                           placeholder="Enter Slug">
                                 </div>
                             </div>
                             <!-- /.card-body -->

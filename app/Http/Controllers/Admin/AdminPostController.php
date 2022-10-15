@@ -104,18 +104,30 @@ class AdminPostController extends Controller
         return redirect()->route('posts.index')->with('success', 'Изменения сохранены');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function destroy($id)
+    public function delete($id)
     {
-        $post = Post::find($id);
-        $post->tags()->sync([]);
-        Storage::delete($post->thumbnail);
-        $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Статья удалена');
+        Post::find($id)->delete();
+        return redirect()->route('adminPost');
+    }
+
+    public function trash()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view('admin/post/trash', compact('posts'));
+    }
+
+    public function restore($id)
+    {
+        Post::onlyTrashed()->where('id', $id)->restore();
+        return redirect()->route('adminPostTrash');
+    }
+
+    public function forceDelete($id)
+    {
+        $post = Post::onlyTrashed()->where('id', $id)->first();
+        $post->tags()->detach();
+        $post->forceDelete();
+        return redirect()->route('adminPostTrash');
+
     }
 }

@@ -42,7 +42,7 @@ class AdminCategoryController extends Controller
             'title' => 'required',
         ]);
         Category::create($request->all());
-        return redirect()->route('categories.index')->with('success', 'Категория добавлена');
+        return redirect()->route('adminCategory')->with('success', 'The category is added');
     }
 
     /**
@@ -71,7 +71,7 @@ class AdminCategoryController extends Controller
         ]);
         $category = Category::find($id);
         $category->update($request->all());
-        return redirect()->route('categories.index')->with('success', 'Изменения сохранены');
+        return redirect()->route('adminCategory')->with('success', 'Changes saved');
     }
 
     /**
@@ -84,9 +84,46 @@ class AdminCategoryController extends Controller
     {
         $category = Category::find($id);
         if ($category->posts->count()) {
-            return redirect()->route('categories.index')->with('error', 'Ошибка! У категории есть записи');
+            return redirect()->route('adminCategory')->with('error', 'Error! The category has not post');
         }
         $category->delete();
-        return redirect()->route('categories.index')->with('success', 'Категория удалена');
+        return redirect()->route('adminCategory')->with('success', 'Category deleted');
+    }
+
+    public function trash()
+    {
+        $categories = Category::onlyTrashed()->get();
+        return view('admin.categories.trash', compact('categories'));
+    }
+
+    /**
+     * Force delete category data
+     *
+     * @param Category $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        Category::onlyTrashed()->where('id', $id)->restore();
+        return redirect()->route('adminCategoryRestore')->with('success', 'Category restored successfully.');
+    }
+
+    /**
+     * Force delete user data
+     *
+     * @param Category $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function forceDelete($id)
+    {
+        $category = Category::onlyTrashed()->where('id', $id)->first();
+        foreach ($category->posts as $post) {
+            $post->tags()->detach();
+            $post->forceDelete();
+        }
+        $category->forceDelete();
+        return redirect()->route('adminCategoryTrash');
     }
 }

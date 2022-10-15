@@ -38,7 +38,7 @@
                 <td>{{ $post->body }}</td>
                 <td>@forelse($post->tags as $tag)
                         <a class="text-decoration-none" style="color: #e53e3e;
-                        " href="{{ route('tagId', $tag->id)  }}">
+                        " href="{{ route('adminTag',['tagId', $tag->id])  }}">
                             {!!  htmlspecialchars($tag->title, ENT_QUOTES) .'<br>' !!}
                         </a>
                     @empty

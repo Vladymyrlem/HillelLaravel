@@ -29,40 +29,51 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{ route('adminCategoryCreate') }}" class="btn btn-primary mb-3">Добавить
-                                категорию</a>
+                            <a href="{{ route('adminCategoryCreate') }}" class="btn btn-primary mb-3"> Add Category</a>
+                            <a href="{{ route('adminCategoryTrash') }}" class="btn btn-primary mb-3">Category Trash</a>
                             @if (count($categories))
+                                @isset($_SESSION['success'])
+                                    <div class="alert alert-info" role="alert">
+                                        {{   $_SESSION['success']  }}
+                                    </div>
+                                    @php
+                                        unset($_SESSION['success']);
+                                    @endphp
+                                @endisset
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover text-nowrap">
+                                    <table class="table table-bordered table-hover table-dark">
                                         <thead>
                                         <tr>
-                                            <th style="width: 30px">#</th>
-                                            <th>Наименование</th>
-                                            <th>Slug</th>
-                                            <th>Actions</th>
+                                            <th scope="col" style="width: 30px">#</th>
+                                            <th scope="col">Наименование</th>
+                                            <th scope="col">Slug</th>
+                                            <th scope="col">Actions</th>
+                                            <th scope="col">Created at</th>
+                                            <th scope="col">Updated at</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($categories as $category)
                                             <tr>
                                                 <td>{{ $category->id }}</td>
-                                                <td>{{ $category->title }}</td>
+                                                <th><a href="{{route( 'adminCategory', ['id' => $category->id]) }}">{{ $category->title }}</a></th>
                                                 <td>{{ $category->slug }}</td>
+                                                <td>{{ $category->created_at }}</td>
+                                                <td>{{ $category->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('adminCategoryEdit', ['category' => $category->id]) }}"
+                                                    <a href="{{ route('adminCategoryEdit', ['id' => $category->id]) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
                                                     <form
-                                                        action="{{ route('adminCategoryDestroy', ['category' => $category->id]) }}"
-                                                        method="post" class="float-left">
+                                                        action="{{ route('adminCategoryForceDelete', ['id' => $category->id]) }}"
+                                                        method="post" class="float-left d-flex flex-row justify-between">
                                                         @csrf
-                                                        @method('DELETE')
+                                                        @method('PUT')
                                                         <button type="submit" class="btn btn-danger btn-sm"
                                                                 onclick="return confirm('Подтвердите удаление')">
-                                                            <i
-                                                                class="fas fa-trash-alt"></i>
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>

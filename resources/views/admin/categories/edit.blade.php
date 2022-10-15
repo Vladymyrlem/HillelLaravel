@@ -29,17 +29,38 @@
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('categories.update', ['category' => $category->id]) }}">
+                        <form role="form" method="post" action="{{ route('adminCategoryUpdate', ['id' => $category->id]) }}">
                             @csrf
-                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title">Название</label>
+                                    <label for="title">Title</label>
                                     <input type="text" name="title"
                                            class="form-control @error('title') is-invalid @enderror" id="title"
                                            value="{{ $category->title }}">
                                 </div>
                             </div>
+                            @if($errors->has('title'))
+                                @foreach($errors->get('title') as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="slug">Slug</label>
+                                    <input type="text" name="slug"
+                                           class="form-control @error('title') is-invalid @enderror" id="slug"
+                                           value="{{ $category->slug }}">
+                                </div>
+                            </div>
+                            @if($errors->has('slug'))
+                                @foreach($errors->get('slug') as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
                             <!-- /.card-body -->
 
                             <div class="card-footer">

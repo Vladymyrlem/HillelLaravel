@@ -28,10 +28,10 @@
                             <a class="nav-link" href="/author">Authors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/tags">Tags</a>
+                            <a class="nav-link" href="{{route('adminTag') }}">Tags</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/category">Category</a>
+                            <a class="nav-link" href="{{ route('adminCategory')  }}">Category</a>
                         </li>
 
                     </ul>
