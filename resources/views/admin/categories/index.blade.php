@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="#">{{route('home')}}</a></li>
+                        <li class="breadcrumb-item active">Tags Page</li>
                     </ol>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Список категорий</h3>
+                            <h3 class="card-title">Categories List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
