@@ -102,13 +102,6 @@ class AdminPostController extends Controller
             'body' => ['required', 'min:2', 'max:255']
         ]);
 
-        $post = Post::find($id);
-        $data = $request->all();
-
-        if ($file = Post::uploadImage($request, $post->thumbnail)) {
-            $data['thumbnail'] = $file;
-        }
-
         $post = Post::find($request->input('id'));
         $post->update($request->all());
         $post->tags()->sync($request->tags_id);

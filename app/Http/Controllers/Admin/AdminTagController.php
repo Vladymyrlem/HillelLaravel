@@ -33,7 +33,7 @@ class AdminTagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $slug
+     * @param int $slug
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($slug)
@@ -46,7 +46,7 @@ class AdminTagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -63,7 +63,7 @@ class AdminTagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
@@ -75,35 +75,38 @@ class AdminTagController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        $tag = Tag::find($id);
-
         $request->validate([
-            'id' => ['required'],
             'title' => ['required', 'min:2', 'max:255'],
             'slug' => ['required', 'min:2', 'max:255']
         ]);
-        $tag->update($request->all());
-        return redirect()->route('adminTag');
+        $tag = Tag::find($id);
+
+        $tag->title = $request->title;
+        $tag->slug = $request->slug;
+        $tag->save();
+        return redirect()->route('adminTag')->with('success', 'Tag updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function delete($id)
     {
         $tag = Tag::find($id);
+
         if ($tag->posts->count()) {
             return redirect()->route('adminTag')->with('error', 'Ошибка! У тегов есть записи');
         }
+
         $tag->delete();
         return redirect()->route('adminTag')->with('success', 'Тег удален');
     }
@@ -117,7 +120,7 @@ class AdminTagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function restore($id)
@@ -129,7 +132,7 @@ class AdminTagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function forceDelete($id)
