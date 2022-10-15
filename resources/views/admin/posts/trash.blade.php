@@ -50,8 +50,8 @@
                 <td>{{ $post->body }}</td>
                 <td>{{ $post->category_id }}</td>
                 <td>{{ $post->tags->pluck('title')->join(', ') }}</td>
-                <td><a href="{{route('adminPostRestore', $post->id)}}">RESTORE</a></td>
-
+                <td><a class="btn btn-info" href="{{ route('adminPostRestore',['id' => $post->id]) }}">RESTORE</a></td>
+                <td><a class="btn btn-danger" href="{{ route('adminPostForceDelete',['id' => $post->id]) }}">X</a></td>
             </tr>
         @empty
             <p>Empty</p>

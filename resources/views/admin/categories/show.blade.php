@@ -19,7 +19,11 @@
             <th scope="col">{{ $category->slug }}</th>
             <th scope="col">
                 @foreach($category->posts as $post)
-                        <?php echo $post->title . '<br>'; ?>
+                    <a href="{{route('adminPostShow', $post->id)}}">
+                        {!!  htmlspecialchars($post->title, ENT_QUOTES) .'<br>' !!}
+
+                    </a>
+
                 @endforeach
             </th>
             <th scope="col">{{ $category->created_at }}</th>

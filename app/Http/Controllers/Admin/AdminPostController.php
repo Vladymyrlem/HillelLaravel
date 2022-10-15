@@ -31,7 +31,7 @@ class AdminPostController extends Controller
      */
     public function show($id)
     {
-        $post = Category::find($id);
+        $post = Post::find($id);
         return view('admin.posts.show', compact('post'));
     }
 

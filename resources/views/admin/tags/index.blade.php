@@ -49,7 +49,7 @@
                                             <tr>
                                                 <td>{{ $tag->id }}</td>
                                                 <td>
-                                                    <a href="{{route('adminTagShow', $tag->id)}}">
+                                                    <a href="{{route('adminTagShow', $tag->slug)}}">
                                                     {{ $tag->title }}
                                                     </a>
                                                 </td>
@@ -58,7 +58,9 @@
                                                     </td>
                                                 <td>
                                                     @foreach($tag->posts as $post)
+                                                        <a href="{{route('adminPostShow', $post->id)}}">
                                                     {!!   $post->title.'<br>' !!}
+                                                        </a>
                                                     @endforeach
                                                 </td>
                                                 <td>{{ $tag->created_at }}</td>

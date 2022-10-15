@@ -29,7 +29,8 @@
         @foreach($posts as $post)
             <tr>
                 <th scope="row">{{ $post->id }}</th>
-                <th scope="row">{{ $post->title }}</th>
+                <th scope="row">
+                    <a href="{{route('adminPostShow', $post->id)}}">{{ $post->title }}</a></th>
                 <td><a href="{{ route('author.show', ['authorId' => $post->users->id])  }}">{{ $post->users->name }}</a>
                 </td>
                 <td>
@@ -38,11 +39,13 @@
                 <td>{{ $post->body }}</td>
                 <td>@forelse($post->tags as $tag)
                         <a class="text-decoration-none" style="color: #e53e3e;
-                        " href="{{ route('adminTagShow',['slug', $tag->id])  }}">
+                        " href="{{ route('adminTagShow',['id' => $tag->slug])  }}">
                             {!!  htmlspecialchars($tag->title, ENT_QUOTES) .'<br>' !!}
                         </a>
                     @empty
                             <?php echo 'Tag not found'; ?>
+                        <a href="{{ route('adminPostEdit',$post->id) }}">Do you want to add tag</a>
+
                     @endforelse</td>
                 <td>{{ date_create($post->updated_at)->format('Y-m-d') }}</td>
             </tr>

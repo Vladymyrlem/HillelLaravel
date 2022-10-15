@@ -39,6 +39,7 @@
                                             <th scope="col">Id</th>
                                             <th scope="col">Title</th>
                                             <th scope="col">Body</th>
+                                            <th scope="col">Category</th>
                                             <th scope="col">Author</th>
                                             <th scope="col">Tags</th>
                                             <th scope="col">Created_at</th>
@@ -50,15 +51,25 @@
                                         @foreach($posts as $post)
                                             <tr>
                                                 <td>{{ $post->id }}</td>
-                                                <td>{{ $post->title }}</td>
-                                                <td>{{ $post->categories->title }}</td>
                                                 <td>
-                                                    {{ $post->users->title }}
+                                                    <a href="{{route('adminPostShow',$post->id)}}">
+                                                        {{ $post->title }}
+                                                    </a>
+                                                    </td>
+                                                <td>{{ $post->body }}</td>
+                                                <td>
+                                                    <a href="{{route('adminCategoryShow',$post->categories->id)}}">
+                                                        {{ $post->categories->title }}
+                                                    </a>
+                                                    </td>
+                                                <td>
+                                                    <a href="{{ route('author.show', ['authorId' => $post->users->id])  }}">{{ $post->users->name }}</a>
                                                 </td>
                                                 <td>@forelse($post->tags as $tag)
                                                         {!! $tag->title . '<br>' !!}
                                                     @empty
                                                         <?php echo 'Tags Not Found';?>
+                                                        <br><a href="{{route('adminPostEdit',$post->id)}}">Do you want to add tag</a>
                                                     @endforelse
                                                 </td>
                                                 <td>{{ $post->created_at }}</td>

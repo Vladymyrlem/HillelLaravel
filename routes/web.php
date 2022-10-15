@@ -64,4 +64,4 @@ Route::get('/admin/post/delete/{id}', [AdminPostController::class, 'delete'])->n
 Route::get('/admin/post/trash', [AdminPostController::class, 'trash'])->name('adminPostTrash');
 Route::get('/admin/post/restore/{id}', [AdminPostController::class, 'restore'])->name('adminPostRestore');
 Route::get('/admin/post/forceDelete/{id}', [AdminPostController::class, 'forceDelete'])->name('adminPostForceDelete');
-Route::get('/admin/post/{id}', [AdminTagController::class, 'show'])->name('adminPostShow')->whereNumber('id');
+Route::get('/admin/post/{id}', [AdminPostController::class, 'show'])->name('adminPostShow')->whereNumber('id');

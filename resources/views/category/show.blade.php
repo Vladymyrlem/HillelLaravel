@@ -32,7 +32,7 @@
             <tr>
                 <th scope="row">{{ $index++ }}</th>
                 <th>{{ $post->title }}</th>
-                <td><a href="/author/{{ $post->users->id }}">{{ $post->users->name }}</a></td>
+                <td><a href="{{ route('authorShow', $post->users->id)  }}">{{ $post->users->name }}</a></td>
                 <td>{{ $post->categories->title }}</td>
                 <td>{{ $post->body }}</td>
                 <td>{{ $post->created_at }}</td>

@@ -38,7 +38,7 @@
                 <td>{{ $post->body }}</td>
                 <td>@foreach($post->tags as $tag)
                         {!!  htmlspecialchars($tag->title, ENT_QUOTES) .'<br>' !!}
-                    @endforeach</td> {{-- Типо с защитой он инъекции. Нормально так делать? --}}
+                    @endforeach</td>
                 <td>{{ $post->created_at->isoFormat('YYYY-M-d (dddd)') }}</td>
                 <td>{{ $post->updated_at->diffForHumans() }}</td>
             </tr>

@@ -31,7 +31,8 @@
 
             <tr>
                 <th scope="row">{{ $index++ }}</th>
-                <th>{{ $auth->name }}</th>
+                <th>
+                    <a href="{{route('author.show', $auth->id)}}">{{ $auth->name }}</a></th>
                 <td>{{ $auth->email }}</td>
                 <td>{{ $auth->created_at }}</td>
                 <td>{{ $auth->updated_at }}</td>

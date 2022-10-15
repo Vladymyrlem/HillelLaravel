@@ -19,7 +19,9 @@
             <th scope="col">{{ $tag->slug }}</th>
             <th scope="col">
                 @foreach($tag->posts as $post)
-                        <?php echo $post->title . '<br>'; ?>
+                    <a href="{{ route('adminPostShow', $post->id) }}">
+                        {!!  htmlspecialchars($post->tags->title, ENT_QUOTES) .'<br>' !!}
+                    </a>
                 @endforeach
             </th>
             <th scope="col">{{ $tag->created_at }}</th>
