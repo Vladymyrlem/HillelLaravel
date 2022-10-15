@@ -35,8 +35,8 @@ Route::get('admin/categories', [AdminCategoryController::class, 'index'])->name(
 Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->name('adminCategoryCreate');
 Route::post('/admin/categories/store', [AdminCategoryController::class, 'store'])->name('adminCategoryStore');
 Route::get('/admin/categories/edit/{id}', [AdminCategoryController::class, 'edit'])->name('adminCategoryEdit');
-Route::post('/admin/categories/update', [AdminCategoryController::class, 'update'])->name('adminCategoryUpdate');
-Route::get('/admin/categories/delete/{id}', [AdminCategoryController::class, 'destroy'])->name('adminCategoryDelete');
+Route::put('/admin/categories/update/{id}', [AdminCategoryController::class, 'update'])->name('adminCategoryUpdate');
+Route::get('/admin/categories/delete/{id}', [AdminCategoryController::class, 'delete'])->name('adminCategoryDelete');
 Route::get('/admin/categories/trash', [AdminCategoryController::class, 'trash'])->name('adminCategoryTrash');
 Route::get('/admin/categories/restore/{id}', [AdminCategoryController::class, 'restore'])->name('adminCategoryRestore');
 Route::get('/admin/categories/forceDelete/{id}', [AdminCategoryController::class, 'forceDelete'])->name('adminCategoryForceDelete');
@@ -47,7 +47,7 @@ Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('adminTag'
 Route::get('/admin/tag/create', [AdminTagController::class, 'create'])->name('adminTagCreate');
 Route::post('/admin/tag/store', [AdminTagController::class, 'store'])->name('adminTagStore');
 Route::get('/admin/tag/edit/{id}', [AdminTagController::class, 'edit'])->name('adminTagEdit');
-Route::post('/admin/tag/update', [AdminTagController::class, 'update'])->name('adminTagUpdate');
+Route::put('/admin/tag/update/{tag}', [AdminTagController::class, 'update'])->name('adminTagUpdate');
 Route::get('/admin/tag/delete/{id}', [AdminTagController::class, 'delete'])->name('adminTagDelete');
 Route::get('/admin/tag/trash', [AdminTagController::class, 'trash'])->name('adminTagTrash');
 Route::get('/admin/tag/restore/{id}', [AdminTagController::class, 'restore'])->name('adminTagRestore');
@@ -59,7 +59,7 @@ Route::get('/admin/post', [AdminPostController::class, 'index'])->name('adminPos
 Route::get('/admin/post/create', [AdminPostController::class, 'create'])->name('adminPostCreate');
 Route::post('/admin/post/store', [AdminPostController::class, 'store'])->name('adminPostStore');
 Route::get('/admin/post/edit/{id}', [AdminPostController::class, 'edit'])->name('adminPostEdit');
-Route::post('/admin/post/update', [AdminPostController::class, 'update'])->name('adminPostUpdate');
+Route::put('/admin/post/update/{id}', [AdminPostController::class, 'update'])->name('adminPostUpdate');
 Route::get('/admin/post/delete/{id}', [AdminPostController::class, 'delete'])->name('adminPostDelete');
 Route::get('/admin/post/trash', [AdminPostController::class, 'trash'])->name('adminPostTrash');
 Route::get('/admin/post/restore/{id}', [AdminPostController::class, 'restore'])->name('adminPostRestore');

@@ -30,7 +30,7 @@
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('adminTagUpdate', ['tag' => $tag->id]) }}">
+                        <form method="post" action="{{ route('adminTagUpdate', ['tag' => $tag->id]) }}">
                             @csrf
                             <input type="hidden" name="id" value="{{ $tag->id }}">
                             <div class="mb-3">

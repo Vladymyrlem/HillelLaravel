@@ -29,7 +29,7 @@
         unset($_SESSION['success']);
     @endphp
     <h1>Post List</h1>
-    <table class="table">
+    <table class="table responsivetable">
         <thead>
         <tr>
             <th scope="col">ID</th>
@@ -50,7 +50,7 @@
                 <td>{{ $post->body }}</td>
                 <td>{{ $post->category_id }}</td>
                 <td>{{ $post->tags->pluck('title')->join(', ') }}</td>
-                <td><a href="{{route('adminPostRestore')}}">RESTORE</a></td>
+                <td><a href="{{route('adminPostRestore', $post->id)}}">RESTORE</a></td>
 
             </tr>
         @empty

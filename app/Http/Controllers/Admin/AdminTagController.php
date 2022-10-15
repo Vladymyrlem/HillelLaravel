@@ -79,17 +79,14 @@ class AdminTagController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
+            'id' => ['required'],
             'title' => ['required', 'min:2', 'max:255'],
             'slug' => ['required', 'min:2', 'max:255']
         ]);
-        $tag = Tag::find($id);
-
-        $tag->title = $request->title;
-        $tag->slug = $request->slug;
-        $tag->save();
+        $tag->update($request->all());
         return redirect()->route('adminTag')->with('success', 'Tag updated successfully!');
     }
 
@@ -104,11 +101,11 @@ class AdminTagController extends Controller
         $tag = Tag::find($id);
 
         if ($tag->posts->count()) {
-            return redirect()->route('adminTag')->with('error', 'Ошибка! У тегов есть записи');
+            return redirect()->route('adminTag')->with('error', 'Error! this Tag Has Post');
         }
 
         $tag->delete();
-        return redirect()->route('adminTag')->with('success', 'Тег удален');
+        return redirect()->route('adminTag')->with('success', 'Tag deleted');
     }
 
     public function trash()

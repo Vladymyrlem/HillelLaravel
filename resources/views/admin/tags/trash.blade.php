@@ -28,7 +28,7 @@
     @php
         unset($_SESSION['success']);
     @endphp
-    <h1>Category List</h1>
+    <h1>Trash Tags List</h1>
     <table class="table">
         <thead>
         <tr>
@@ -49,9 +49,8 @@
                 <th>{{ $tag->slug }}</th>
                 <th>{{ $tag->created_at }}</th>
                 <th>{{ $tag->updated_at }}</th>
-                <td><a class="btn btn-info" href="{{ route('admintagRestore',['id' => $tag->id]) }}">RESTORE</a></td>
+                <td><a class="btn btn-info" href="{{ route('adminTagRestore',['id' => $tag->id]) }}">RESTORE</a></td>
                 <td><a class="btn btn-danger" href="{{ route('adminTagForceDelete',['id' => $tag->id]) }}">X</a></td>
-
             </tr>
         @empty
             <p>Empty</p>

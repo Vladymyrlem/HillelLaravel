@@ -33,7 +33,7 @@
                             <a href="{{ route('adminPostTrash') }}" class="btn btn-primary mb-3">Posts Trash</a>
                         @if (count($posts))
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover text-nowrap responsivetable">
+                                    <table class="table table-bordered table-dark table-hover text-wrap">
                                         <thead>
                                         <tr>
                                             <th scope="col">Id</th>
@@ -52,6 +52,9 @@
                                                 <td>{{ $post->id }}</td>
                                                 <td>{{ $post->title }}</td>
                                                 <td>{{ $post->categories->title }}</td>
+                                                <td>
+                                                    {{ $post->users->title }}
+                                                </td>
                                                 <td>@forelse($post->tags as $tag)
                                                         <a href="{{route('adminTagShow', ['slug' => $tag->id])}}">
                                                         {!! $tag->title . '<br>' !!}
