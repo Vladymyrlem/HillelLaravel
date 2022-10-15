@@ -36,11 +36,11 @@ Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'
 Route::post('/admin/categories/store', [AdminCategoryController::class, 'store'])->name('adminCategoryStore');
 Route::get('/admin/categories/edit/{id}', [AdminCategoryController::class, 'edit'])->name('adminCategoryEdit');
 Route::post('/admin/categories/update', [AdminCategoryController::class, 'update'])->name('adminCategoryUpdate');
-Route::delete('/admin/categories/delete/{id}', [AdminCategoryController::class, 'delete'])->name('adminCategoryDelete');
+Route::get('/admin/categories/delete/{id}', [AdminCategoryController::class, 'destroy'])->name('adminCategoryDelete');
 Route::get('/admin/categories/trash', [AdminCategoryController::class, 'trash'])->name('adminCategoryTrash');
 Route::get('/admin/categories/restore/{id}', [AdminCategoryController::class, 'restore'])->name('adminCategoryRestore');
 Route::get('/admin/categories/forceDelete/{id}', [AdminCategoryController::class, 'forceDelete'])->name('adminCategoryForceDelete');
-Route::get('/categories/{categoryId}', [CategoryController::class, 'show'])->name('category.show');
+Route::get('/admin/categories/{categoryId}', [AdminCategoryController::class, 'show'])->name('adminCategoryShow');
 
 /*Tag Router*/
 Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('adminTag');

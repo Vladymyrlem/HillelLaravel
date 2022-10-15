@@ -74,14 +74,15 @@ class AdminTagController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $tag = Tag::find($id);
+
         $request->validate([
             'id' => ['required'],
             'title' => ['required', 'min:2', 'max:255'],
             'slug' => ['required', 'min:2', 'max:255']
         ]);
-        $tag = Tag::find($id);
         $tag->update($request->all());
-        return redirect()->route('tags.index')->with('success', 'Changes updates');
+        return redirect()->route('adminTag');
     }
 
     /**

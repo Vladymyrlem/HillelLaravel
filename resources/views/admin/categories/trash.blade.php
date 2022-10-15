@@ -44,8 +44,8 @@
                 <th scope="row">{{ $category->id }}</th>
                 <td>{{ $category->title }}</td>
                 <td>{{ $category->slug }}</td>
-                <td>{{ $category->post->pluck('title')->join(', ') }}</td>
-                <td><a href="{{ route('adminCategoryRestore') }}">RESTORE</a></td>
+                <td>{{ $category->posts->pluck('title')->join(', ') }}</td>
+                <td><a href="{{ route('adminCategoryRestore', ['id', $category->id]) }}">RESTORE</a></td>
 
             </tr>
         @empty

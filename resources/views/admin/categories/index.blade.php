@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Категории</h1>
+                    <h1>Categories</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -32,14 +32,6 @@
                             <a href="{{ route('adminCategoryCreate') }}" class="btn btn-primary mb-3"> Add Category</a>
                             <a href="{{ route('adminCategoryTrash') }}" class="btn btn-primary mb-3">Category Trash</a>
                             @if (count($categories))
-                                @isset($_SESSION['success'])
-                                    <div class="alert alert-info" role="alert">
-                                        {{   $_SESSION['success']  }}
-                                    </div>
-                                    @php
-                                        unset($_SESSION['success']);
-                                    @endphp
-                                @endisset
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-hover table-dark">
                                         <thead>
@@ -56,7 +48,7 @@
                                         @foreach($categories as $category)
                                             <tr>
                                                 <td>{{ $category->id }}</td>
-                                                <th><a href="{{route( 'adminCategory', ['id' => $category->id]) }}">{{ $category->title }}</a></th>
+                                                <th><a href="{{route( 'adminCategoryShow', ['categoryId' => $category->id]) }}">{{ $category->title }}</a></th>
                                                 <td>{{ $category->slug }}</td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>{{ $category->updated_at }}</td>
@@ -65,17 +57,10 @@
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-
-                                                    <form
-                                                        action="{{ route('adminCategoryForceDelete', ['id' => $category->id]) }}"
-                                                        method="post" class="float-left d-flex flex-row justify-between">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                                onclick="return confirm('Подтвердите удаление')">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
+                                                    <a href="{{ route('adminCategoryDelete', ['id' => $category->id]) }}"
+                                                       class="btn btn-danger btn-sm float-right mr-1">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

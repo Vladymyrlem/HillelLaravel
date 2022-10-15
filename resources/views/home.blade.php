@@ -33,7 +33,7 @@
                 <td><a href="{{ route('author.show', ['authorId' => $post->users->id])  }}">{{ $post->users->name }}</a>
                 </td>
                 <td>
-                    <a href="{{ route('category.show', ['categoryId' => $post->categories->id]) }}">{{ $post->categories->title }}</a>
+                    <a href="{{ route('adminCategoryShow', ['categoryId' => $post->categories->id]) }}">{{ $post->categories->title }}</a>
                 </td>
                 <td>{{ $post->body }}</td>
                 <td>@forelse($post->tags as $tag)

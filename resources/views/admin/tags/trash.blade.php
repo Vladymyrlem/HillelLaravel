@@ -45,7 +45,7 @@
                 <td>{{ $category->title }}</td>
                 <td>{{ $category->slug }}</td>
                 <td>{{ $category->post->pluck('title')->join(', ') }}</td>
-                <td><a href="{{ route('adminCategoryRestore') }}">RESTORE</a></td>
+                <td><a href="{{ route('admintagRestore',['id' => $category->id]) }}">RESTORE</a></td>
 
             </tr>
         @empty
@@ -53,5 +53,5 @@
         @endforelse
         </tbody>
     </table>
-    <a class="btn btn-secondary mt-3" href="{{ route('adminCategory') }}"> Back </a>
+    <a class="btn btn-secondary mt-3" href="{{ route('adminTag') }}"> Back </a>
 @endsection

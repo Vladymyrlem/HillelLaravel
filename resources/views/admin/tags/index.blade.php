@@ -38,8 +38,8 @@
                                             <th style="width: 30px">#</th>
                                             <th>Title</th>
                                             <th>Slug</th>
+                                            <th>Created at</th>
                                             <th>Actions</th>
-                                            <th>Restore</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -48,26 +48,16 @@
                                                 <td>{{ $tag->id }}</td>
                                                 <td>{{ $tag->title }}</td>
                                                 <td>{{ $tag->slug }}</td>
+                                                <td>{{ $tag->created_at }}</td>
                                                 <td>
                                                     <a href="{{ route('adminTagEdit', ['id' => $tag->id]) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-
-                                                    <form
-                                                        action="{{ route('adminTagForceDelete', ['id' => $tag->id]) }}"
-                                                        method="post" class="float-left">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Подтвердите удаление')">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
+                                                    <a href="{{ route('adminTagForceDelete', ['id' => $tag->id]) }}" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </a>
                                                 </td>
-                                                <td><a href="{{ route('adminTagRestore', ['id' => $tag->id]) }}"
-                                                       class="btn btn-info btn-sm float-left mr-1">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a></td>
                                             </tr>
                                         @endforeach
                                         </tbody>

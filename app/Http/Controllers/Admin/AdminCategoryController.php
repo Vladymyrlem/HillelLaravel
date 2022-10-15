@@ -21,6 +21,18 @@ class AdminCategoryController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $category = Category::find($id);
+        return view('admin.categories.show', compact('category'));
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -105,8 +117,8 @@ class AdminCategoryController extends Controller
      */
     public function restore($id)
     {
-        Category::onlyTrashed()->where('id', $id)->restore();
-        return redirect()->route('adminCategoryRestore')->with('success', 'Category restored successfully.');
+        Category::withTrashed()->where('id', $id)->restore();
+        return redirect()->route('adminCategoryRestore',['id'=> $id])->with('success', 'Category restored successfully.');
     }
 
     /**
