@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\AdminMainController;
 */
 
 /*Home Page. List Posts*/
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /*Author routers group*/
 Route::get('/author', [AuthorController::class, 'index'])->name('author');

@@ -29,20 +29,34 @@
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('tags.store') }}">
+                        <form role="form" method="post" action="{{ route('adminTagStore') }}">
                             @csrf
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="title">Название</label>
-                                    <input type="text" name="title"
-                                           class="form-control @error('title') is-invalid @enderror" id="title"
-                                           placeholder="Название">
-                                </div>
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Enter title</label>
+                                <input type="text" class="form-control" id="title" name="title"
+                                       value="{{ old('title') }}" placeholder="Enter title">
                             </div>
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            @if($errors->has('title'))
+                                @foreach($errors->get('title') as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
+                            <div class=" mb-3">
+                                <label for="slug" class="form-label">Enter slug</label>
+                                <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}"
+                                       placeholder="Enter slug">
+                            </div>
+                            @if($errors->has('slug'))
+                                @foreach($errors->get('slug') as $error)
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ $error }}
+                                    </div>
+                                @endforeach
+                            @endif
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
 

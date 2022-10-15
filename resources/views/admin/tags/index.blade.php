@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Tags List</li>
                     </ol>
                 </div>
             </div>
@@ -54,7 +54,8 @@
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="{{ route('adminTagForceDelete', ['id' => $tag->id]) }}" class="btn btn-danger btn-sm">
+                                                    <a href="{{ route('adminTagForceDelete', ['id' => $tag->id]) }}"
+                                                       class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                 </td>

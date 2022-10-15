@@ -19,7 +19,7 @@
             <th scope="col">{{ $category->slug }}</th>
             <th scope="col">
                 @foreach($category->posts as $post)
-                        <?php echo $post->title.'<br>'; ?>
+                        <?php echo $post->title . '<br>'; ?>
                 @endforeach
             </th>
             <th scope="col">{{ $category->created_at }}</th>

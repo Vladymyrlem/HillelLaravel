@@ -19,7 +19,7 @@
             <th scope="col">{{ $tag->slug }}</th>
             <th scope="col">
                 @foreach($tag->posts as $post)
-                        <?php echo $post->title.'<br>'; ?>
+                        <?php echo $post->title . '<br>'; ?>
                 @endforeach
             </th>
             <th scope="col">{{ $tag->created_at }}</th>

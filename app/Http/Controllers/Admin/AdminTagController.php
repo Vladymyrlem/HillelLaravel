@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class AdminTagController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +51,7 @@ class AdminTagController extends Controller
         ]);
 
         Tag::create($request->all());
-        return redirect()->route('tags.index')->with('success', 'Tag added');
+        return redirect()->route('adminTag')->with('success', 'Tag added');
     }
 
     /**

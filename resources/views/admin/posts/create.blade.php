@@ -10,8 +10,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Create Post</li>
                     </ol>
                 </div>
             </div>
@@ -29,62 +29,100 @@
                         </div>
                         <!-- /.card-header -->
 
-                        <form role="form" method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+                        <form role="form" method="post" action="{{ route('adminPostStore') }}"
+                              enctype="multipart/form-data">
                             @csrf
+
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="title">Название</label>
-                                    <input type="text" name="title"
-                                           class="form-control @error('title') is-invalid @enderror" id="title"
-                                           placeholder="Название">
+
+                                <div class="mb-3 form-group">
+                                    <label for="title" class="form-label">Enter title</label>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                           value="{{ old('title') }}" placeholder="Enter title">
+                                    @if($errors->has('title'))
+                                        @foreach($errors->get('title') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="description">Цитата</label>
-                                    <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="3" placeholder="Цитата ..."></textarea>
+
+                                <div class="mb-3 form-group">
+                                    <label for="body" class="form-label">Enter body</label>
+                                    <textarea class="form-control" name="body" id="body" cols="30"
+                                              rows="4">{{ old('body') }}</textarea>
+                                    @if($errors->has('body'))
+                                        @foreach($errors->get('body') as $error)
+                                            <div class="alert alert-danger mt-3" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="content">Контент</label>
-                                    <textarea name="content" class="form-control @error('content') is-invalid @enderror" id="content" rows="7"
-                                              placeholder="Контент ..."></textarea>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="category_id">Категория</label>
-                                    <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
-                                        @foreach($categories as $k => $v)
-                                            <option value="{{ $k }}">{{ $v }}</option>
+                                <div class="mb-3 form-group">
+                                    <label for="user_id" class="form-label">Select a author</label>
+                                    <select class="form-select" id="user_id" name="user_id">
+                                        @foreach($users as $user)
+                                            <option
+                                                {{ $user->id == old('user_id')? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
+                                    @if($errors->has('user_id'))
+                                        @foreach($errors->get('user_id') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="tags">Теги</label>
-                                    <select name="tags[]" id="tags" class="select2" multiple="multiple"
-                                            data-placeholder="Выбор тегов" style="width: 100%;">
-                                        @foreach($tags as $k => $v)
-                                            <option value="{{ $k }}">{{ $v }}</option>
+                                <div class="mb-3 form-group">
+                                    <label for="category_id" class="form-label">Select a category</label>
+                                    <select class="form-select" id="category_id" name="category_id">
+                                        @foreach($categories as $category)
+                                            <option
+                                                {{ $category->id == old('category_id')? 'selected' : '' }} value="{{ $category->id == old('category_id')? old('category_id'): $category->id }}">{{ $category->title }}</option>
                                         @endforeach
                                     </select>
+                                    @if($errors->has('category_id'))
+                                        @foreach($errors->get('category_id') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="thumbnail">Изображение</label>
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" name="thumbnail" id="thumbnail"
-                                                   class="custom-file-input">
-                                            <label class="custom-file-label" for="thumbnail">Choose file</label>
-                                        </div>
-                                    </div>
+                                <div class="mb-3 form-group">
+                                    <label for="tag_id" class="form-label">Select a tag(s) + ctrl</label>
+                                    <select class="form-select" id="tag_id" name="tags_id[]" multiple>
+                                        @foreach($tags as $tag)
+                                            <option
+                                                @if(!empty(old('tags_id')))
+                                                    @foreach(old('tags_id') as $tag_id)
+                                                        {{ $tag->id == $tag_id? 'selected' : '' }}
+                                                    @endforeach
+                                                @endif
+                                                value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('tags_id'))
+                                        @foreach($errors->get('tags_id') as $error)
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $error }}
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
-
                             </div>
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
 

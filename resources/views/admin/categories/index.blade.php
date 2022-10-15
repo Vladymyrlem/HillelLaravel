@@ -48,7 +48,9 @@
                                         @foreach($categories as $category)
                                             <tr>
                                                 <td>{{ $category->id }}</td>
-                                                <th><a href="{{route( 'adminCategoryShow', ['categoryId' => $category->id]) }}">{{ $category->title }}</a></th>
+                                                <th>
+                                                    <a href="{{route( 'adminCategoryShow', ['categoryId' => $category->id]) }}">{{ $category->title }}</a>
+                                                </th>
                                                 <td>{{ $category->slug }}</td>
                                                 <td>{{ $category->created_at }}</td>
                                                 <td>{{ $category->updated_at }}</td>
