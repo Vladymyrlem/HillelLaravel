@@ -30,11 +30,17 @@ class AdminTagController extends Controller
         return view('admin.tags.create');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($slug)
     {
         $tag = Tag::where('slug', $slug)->firstOrFail();
         $posts = $tag->posts()->with('category')->orderBy('id', 'desc')->paginate(2);
-        return view('tags.show', compact('tag', 'posts'));
+        return view('admin.tags.show', compact('tag', 'posts'));
     }
 
     /**
@@ -92,20 +98,20 @@ class AdminTagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $tag = Tag::find($id);
         if ($tag->posts->count()) {
-            return redirect()->route('tags.index')->with('error', 'Ошибка! У тегов есть записи');
+            return redirect()->route('adminTag')->with('error', 'Ошибка! У тегов есть записи');
         }
         $tag->delete();
-        return redirect()->route('tags.index')->with('success', 'Тег удален');
+        return redirect()->route('adminTag')->with('success', 'Тег удален');
     }
 
     public function trash()
     {
         $tags = Tag::onlyTrashed()->get();
-        return view('admin/tag/trash', compact('tags'));
+        return view('admin.tags.trash', compact('tags'));
     }
 
     /**

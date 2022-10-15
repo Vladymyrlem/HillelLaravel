@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Статьи</h1>
+                    <h1>Posts</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blank Page</li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
+                        <li class="breadcrumb-item active">Posts Page</li>
                     </ol>
                 </div>
             </div>
@@ -25,22 +25,25 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Список статей</h3>
+                            <h3 class="card-title">Posts List</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{ route('adminPostCreate') }}" class="btn btn-primary mb-3">Добавить статью</a>
-                            @if (count($posts))
+                            <a href="{{ route('adminPostCreate') }}" class="btn btn-primary mb-3">Add Post</a>
+                            <a href="{{ route('adminPostTrash') }}" class="btn btn-primary mb-3">Posts Trash</a>
+                        @if (count($posts))
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover text-nowrap">
+                                    <table class="table table-bordered table-hover text-nowrap responsivetable">
                                         <thead>
                                         <tr>
-                                            <th style="width: 30px">#</th>
-                                            <th>Наименование</th>
-                                            <th>Категория</th>
-                                            <th>Теги</th>
-                                            <th>Дата</th>
-                                            <th>Actions</th>
+                                            <th scope="col">Id</th>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Body</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">Tags</th>
+                                            <th scope="col">Created_at</th>
+                                            <th scope="col">Updated_at</th>
+                                            <th scope="col">Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -48,26 +51,27 @@
                                             <tr>
                                                 <td>{{ $post->id }}</td>
                                                 <td>{{ $post->title }}</td>
-                                                <td>{{ $post->category->title }}</td>
-                                                <td>{{ $post->tags->pluck('title')->join(', ') }}</td>
+                                                <td>{{ $post->categories->title }}</td>
+                                                <td>@forelse($post->tags as $tag)
+                                                        <a href="{{route('adminTagShow', ['slug' => $tag->id])}}">
+                                                        {!! $tag->title . '<br>' !!}
+                                                        </a>
+                                                    @empty
+                                                        <?php echo 'Tags Not Found';?>
+                                                    @endforelse
+                                                </td>
                                                 <td>{{ $post->created_at }}</td>
+                                                <td>{{ $post->updated_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('posts.edit', ['post' => $post->id]) }}"
+                                                    <a href="{{ route('adminPostEdit', ['id' => $post->id]) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
 
-                                                    <form
-                                                        action="{{ route('posts.destroy', ['post' => $post->id]) }}"
-                                                        method="post" class="float-left">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                                onclick="return confirm('Подтвердите удаление')">
-                                                            <i
-                                                                class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </form>
+                                                    <a href="{{ route('adminPostDelete', ['id' => $post->id]) }}"
+                                                       class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

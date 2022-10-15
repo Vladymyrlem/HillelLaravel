@@ -92,7 +92,7 @@ class AdminCategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $category = Category::find($id);
         if ($category->posts->count()) {

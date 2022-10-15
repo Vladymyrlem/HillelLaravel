@@ -8,7 +8,7 @@ class HomeController
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(20);
         return view('home', compact('posts'));
     }
 }

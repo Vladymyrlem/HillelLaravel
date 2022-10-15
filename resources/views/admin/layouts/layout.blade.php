@@ -22,9 +22,6 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="/" class="text-white">Home</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/author">Authors</a>
                         </li>
                         <li class="nav-item">
@@ -33,7 +30,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('adminCategory')  }}">Category</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('adminPost')}}">Posts</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: auto; margin-right: 0">
+                            <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
+                        </li>
                     </ul>
                 </div>
             </div>

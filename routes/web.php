@@ -52,7 +52,7 @@ Route::get('/admin/tag/delete/{id}', [AdminTagController::class, 'delete'])->nam
 Route::get('/admin/tag/trash', [AdminTagController::class, 'trash'])->name('adminTagTrash');
 Route::get('/admin/tag/restore/{id}', [AdminTagController::class, 'restore'])->name('adminTagRestore');
 Route::get('/admin/tag/forceDelete/{id}', [AdminTagController::class, 'forceDelete'])->name('adminTagForceDelete');
-Route::get('/admin/tag/{slug}', [AdminTagController::class, 'show'])->name('adminTagShow');
+Route::get('/admin/tags/{slug}', [AdminTagController::class, 'show'])->name('adminTagShow')->whereNumber('slug');
 
 /*Posts Router*/
 Route::get('/admin/post', [AdminPostController::class, 'index'])->name('adminPost');
@@ -64,3 +64,4 @@ Route::get('/admin/post/delete/{id}', [AdminPostController::class, 'delete'])->n
 Route::get('/admin/post/trash', [AdminPostController::class, 'trash'])->name('adminPostTrash');
 Route::get('/admin/post/restore/{id}', [AdminPostController::class, 'restore'])->name('adminPostRestore');
 Route::get('/admin/post/forceDelete/{id}', [AdminPostController::class, 'forceDelete'])->name('adminPostForceDelete');
+Route::get('/admin/post/{id}', [AdminTagController::class, 'show'])->name('adminPostShow')->whereNumber('id');

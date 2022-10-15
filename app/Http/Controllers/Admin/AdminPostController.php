@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
-use App\Post;
-use App\Tag;
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,8 +19,20 @@ class AdminPostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category', 'tags')->paginate(20);
+        $posts = Post::with('categories', 'tags')->paginate(20);
         return view('admin.posts.index', compact('posts'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        $post = Category::find($id);
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -29,9 +42,10 @@ class AdminPostController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('title', 'id')->all();
-        $tags = Tag::pluck('title', 'id')->all();
-        return view('admin.posts.create', compact('categories', 'tags'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        $users = User::all();
+        return view('admin.posts.create', compact('categories', 'tags', 'users'));
     }
 
     /**
@@ -43,21 +57,17 @@ class AdminPostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|integer',
-            'thumbnail' => 'nullable|image',
+            'user_id' => ['required'],
+            'tags_id' => ['required'],
+            'category_id' => ['required'],
+            'title' => ['required', 'min:2', 'max:255'],
+            'body' => ['required', 'min:2', 'max:255']
         ]);
 
-        $data = $request->all();
+        $post = Post::create($request->all());
+        $post->tags()->sync($request->tags_id);
 
-        $data['thumbnail'] = Post::uploadImage($request);
-
-        $post = Post::create($data);
-        $post->tags()->sync($request->tags);
-
-        return redirect()->route('posts.index')->with('success', 'Статья добавлена');
+        return redirect()->route('adminPost')->with('success', 'Статья добавлена');
     }
 
     /**
@@ -69,9 +79,10 @@ class AdminPostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $categories = Category::pluck('title', 'id')->all();
-        $tags = Tag::pluck('title', 'id')->all();
-        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        $users = User::all();
+        return view('admin.posts.edit', compact('categories', 'tags', 'post', 'users'));
     }
 
     /**
@@ -84,11 +95,11 @@ class AdminPostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'content' => 'required',
-            'category_id' => 'required|integer',
-            'thumbnail' => 'nullable|image',
+            'user_id' => ['required'],
+            'tags_id' => ['required'],
+            'category_id' => ['required'],
+            'title' => ['required', 'min:2', 'max:255'],
+            'body' => ['required', 'min:2', 'max:255']
         ]);
 
         $post = Post::find($id);
@@ -98,10 +109,10 @@ class AdminPostController extends Controller
             $data['thumbnail'] = $file;
         }
 
-        $post->update($data);
-        $post->tags()->sync($request->tags);
-
-        return redirect()->route('posts.index')->with('success', 'Изменения сохранены');
+        $post = Post::find($request->input('id'));
+        $post->update($request->all());
+        $post->tags()->sync($request->tags_id);
+        return redirect()->route('adminPost')->with('success', 'Изменения сохранены');
     }
 
     public function delete($id)
@@ -113,7 +124,7 @@ class AdminPostController extends Controller
     public function trash()
     {
         $posts = Post::onlyTrashed()->get();
-        return view('admin/post/trash', compact('posts'));
+        return view('admin.posts.trash', compact('posts'));
     }
 
     public function restore($id)

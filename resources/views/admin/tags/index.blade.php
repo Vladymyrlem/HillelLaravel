@@ -29,15 +29,17 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <a href="{{ route('adminTagCreate') }}" class="btn btn-primary mb-3">Добавить тег</a>
-                            @if (count($tags))
+                            <a href="{{ route('adminTagCreate') }}" class="btn btn-primary mb-3">Add Tag</a>
+                            <a href="{{ route('adminTagTrash') }}" class="btn btn-primary mb-3">Tags Trash</a>
+                        @if (count($tags))
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover text-nowrap">
+                                    <table class="table table-bordered table-dark table-hover text-nowrap">
                                         <thead>
                                         <tr>
                                             <th style="width: 30px">#</th>
                                             <th>Title</th>
                                             <th>Slug</th>
+                                            <th>Posts</th>
                                             <th>Created at</th>
                                             <th>Actions</th>
                                         </tr>
@@ -46,15 +48,26 @@
                                         @foreach($tags as $tag)
                                             <tr>
                                                 <td>{{ $tag->id }}</td>
-                                                <td>{{ $tag->title }}</td>
-                                                <td>{{ $tag->slug }}</td>
+                                                <td>
+                                                    <a href="{{route('adminTagShow', $tag->id)}}">
+                                                    {{ $tag->title }}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                        {{ $tag->slug }}
+                                                    </td>
+                                                <td>
+                                                    @foreach($tag->posts as $post)
+                                                    {!!   $post->title.'<br>' !!}
+                                                    @endforeach
+                                                </td>
                                                 <td>{{ $tag->created_at }}</td>
                                                 <td>
                                                     <a href="{{ route('adminTagEdit', ['id' => $tag->id]) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-                                                    <a href="{{ route('adminTagForceDelete', ['id' => $tag->id]) }}"
+                                                    <a href="{{ route('adminTagDelete', ['id' => $tag->id]) }}"
                                                        class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
