@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <a href="{{ route('adminPostCreate') }}" class="btn btn-primary mb-3">Add Post</a>
                             <a href="{{ route('adminPostTrash') }}" class="btn btn-primary mb-3">Posts Trash</a>
-                        @if (count($posts))
+                            @if (count($posts))
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-dark table-hover text-wrap">
                                         <thead>
@@ -55,21 +55,22 @@
                                                     <a href="{{route('adminPostShow',$post->id)}}">
                                                         {{ $post->title }}
                                                     </a>
-                                                    </td>
+                                                </td>
                                                 <td>{{ $post->body }}</td>
                                                 <td>
                                                     <a href="{{route('adminCategoryShow',$post->categories->id)}}">
                                                         {{ $post->categories->title }}
                                                     </a>
-                                                    </td>
+                                                </td>
                                                 <td>
                                                     <a href="{{ route('author.show', ['authorId' => $post->users->id])  }}">{{ $post->users->name }}</a>
                                                 </td>
                                                 <td>@forelse($post->tags as $tag)
                                                         {!! $tag->title . '<br>' !!}
                                                     @empty
-                                                        <?php echo 'Tags Not Found';?>
-                                                        <br><a href="{{route('adminPostEdit',$post->id)}}">Do you want to add tag</a>
+                                                            <?php echo 'Tags Not Found'; ?>
+                                                        <br><a href="{{route('adminPostEdit',$post->id)}}">Do you want
+                                                            to add tag</a>
                                                     @endforelse
                                                 </td>
                                                 <td>{{ $post->created_at }}</td>

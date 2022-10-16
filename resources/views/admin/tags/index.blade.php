@@ -31,7 +31,7 @@
                         <div class="card-body">
                             <a href="{{ route('adminTagCreate') }}" class="btn btn-primary mb-3">Add Tag</a>
                             <a href="{{ route('adminTagTrash') }}" class="btn btn-primary mb-3">Tags Trash</a>
-                        @if (count($tags))
+                            @if (count($tags))
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-dark table-hover text-nowrap">
                                         <thead>
@@ -50,16 +50,16 @@
                                                 <td>{{ $tag->id }}</td>
                                                 <td>
                                                     <a href="{{route('adminTagShow', $tag->slug)}}">
-                                                    {{ $tag->title }}
+                                                        {{ $tag->title }}
                                                     </a>
                                                 </td>
                                                 <td>
-                                                        {{ $tag->slug }}
-                                                    </td>
+                                                    {{ $tag->slug }}
+                                                </td>
                                                 <td>
                                                     @foreach($tag->posts as $post)
                                                         <a href="{{route('adminPostShow', $post->id)}}">
-                                                    {!!   $post->title.'<br>' !!}
+                                                            {!!   $post->title.'<br>' !!}
                                                         </a>
                                                     @endforeach
                                                 </td>

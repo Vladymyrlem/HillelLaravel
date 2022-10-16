@@ -34,7 +34,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Edit Post:  "{{ $post->title }}"</h3>
+                            <h3 class="card-title">Edit Post: "{{ $post->title }}"</h3>
                         </div>
                         <!-- /.card-header -->
 
@@ -46,7 +46,8 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Enter title</label>
-                                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title')?? $post->title }}" placeholder="Enter title">
+                                    <input type="text" class="form-control" id="title" name="title"
+                                           value="{{ old('title')?? $post->title }}" placeholder="Enter title">
                                     @if($errors->has('title'))
                                         @foreach($errors->get('title') as $error)
                                             <div class="alert alert-danger" role="alert">
@@ -59,7 +60,8 @@
 
                                 <div class="mb-3">
                                     <label for="body" class="form-label">Enter body</label>
-                                    <textarea class="form-control" name="body" id="body" cols="30" rows="4">{{ old('body')?? $post->body }}</textarea>
+                                    <textarea class="form-control" name="body" id="body" cols="30"
+                                              rows="4">{{ old('body')?? $post->body }}</textarea>
                                     @if($errors->has('body'))
                                         @foreach($errors->get('body') as $error)
                                             <div class="alert alert-danger mt-3" role="alert">
@@ -74,7 +76,8 @@
                                     <label for="user_id" class="form-label">Select a author</label>
                                     <select class="form-select" id="user_id" name="user_id">
                                         @foreach($users as $user)
-                                            <option {{ old('user_id')?? $post->user_id == $user->id ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <option
+                                                {{ old('user_id')?? $post->user_id == $user->id ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('user_id'))
@@ -90,7 +93,8 @@
                                     <label for="category_id" class="form-label">Select a category</label>
                                     <select class="form-select" id="category_id" name="category_id">
                                         @foreach($categories as $category)
-                                            <option {{  old('category_id')??$post->category_id == $category->id? 'selected' : '' }} value="{{ $category->id == old('category_id')? old('category_id'): $category->id }}">{{ $category->title }}</option>
+                                            <option
+                                                {{  old('category_id')??$post->category_id == $category->id? 'selected' : '' }} value="{{ $category->id == old('category_id')? old('category_id'): $category->id }}">{{ $category->title }}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('category_id'))

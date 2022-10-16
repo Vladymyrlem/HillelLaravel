@@ -34,8 +34,9 @@
                             <div class="card-body mb-3">
                                 <div class="form-group">
                                     <label for="title" class="form-label">Enter title</label>
-                                <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" placeholder="Enter title">
-                            </div>
+                                    <input type="text" class="form-control" id="title" name="title"
+                                           value="{{ old('title') }}" placeholder="Enter title">
+                                </div>
                             </div>
                             @if($errors->has('title'))
                                 @foreach($errors->get('title') as $error)
@@ -47,8 +48,9 @@
                             <div class="card-body mb-3">
                                 <div class="form-group">
                                     <label for="slug" class="form-label">Enter slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug') }}" placeholder="Enter slug">
-                            </div>
+                                    <input type="text" class="form-control" id="slug" name="slug"
+                                           value="{{ old('slug') }}" placeholder="Enter slug">
+                                </div>
                             </div>
                             @if($errors->has('slug'))
                                 @foreach($errors->get('slug') as $error)
