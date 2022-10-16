@@ -96,13 +96,8 @@ class AdminCategoryController extends Controller
      */
     public function delete($id)
     {
-//        $category = Category::find($id);
-//        if ($category->posts->count()) {
-//            return redirect()->route('adminCategory')->with('error', 'Error! The category has post');
-//        }
-//        $category->delete();
-//        return redirect()->route('adminCategoryTrash')->with('success', 'Category deleted');
-        Category::find($id)->delete();
+        $category = Category::find($id);
+        $category->delete();
         return redirect()->route('adminCategory')->with('success', 'Category deleted');
     }
 
