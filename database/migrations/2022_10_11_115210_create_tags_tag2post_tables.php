@@ -39,6 +39,5 @@ return new class extends Migration {
     public function down()
     {
         Schema::dropIfExists('post2tag');
-        Schema::dropIfExists('tags');
     }
 };
