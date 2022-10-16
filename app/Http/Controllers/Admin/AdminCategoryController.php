@@ -51,7 +51,8 @@ class AdminCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => ['required', 'min:3', 'max:30'],
+            'slug' => ['required'],
         ]);
         Category::create($request->all());
         return redirect()->route('adminCategory')->with('success', 'The category is added');
@@ -79,8 +80,8 @@ class AdminCategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $request->validate([
-            'title' => 'required',
-            'slug' => 'required'
+            'title' => ['required', 'min:2', 'max:255'],
+            'slug' => ['required', 'min:2', 'max:255']
         ]);
         $category = Category::find($request->input('id'));
         $category->update($request->all());
@@ -95,11 +96,13 @@ class AdminCategoryController extends Controller
      */
     public function delete($id)
     {
-        $category = Category::find($id);
-        if ($category->posts->count()) {
-            return redirect()->route('adminCategory')->with('error', 'Error! The category has not post');
-        }
-        $category->delete();
+//        $category = Category::find($id);
+//        if ($category->posts->count()) {
+//            return redirect()->route('adminCategory')->with('error', 'Error! The category has post');
+//        }
+//        $category->delete();
+//        return redirect()->route('adminCategoryTrash')->with('success', 'Category deleted');
+        Category::find($id)->delete();
         return redirect()->route('adminCategory')->with('success', 'Category deleted');
     }
 

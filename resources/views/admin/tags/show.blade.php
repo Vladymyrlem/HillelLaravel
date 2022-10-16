@@ -20,7 +20,7 @@
             <th scope="col">
                 @foreach($tag->posts as $post)
                     <a href="{{ route('adminPostShow', $post->id) }}">
-                        {!!  htmlspecialchars($post->tags->title, ENT_QUOTES) .'<br>' !!}
+                        {!!  htmlspecialchars($post->tags->pluck('title')->join(','), ENT_QUOTES) .'<br>' !!}
                     </a>
                 @endforeach
             </th>
