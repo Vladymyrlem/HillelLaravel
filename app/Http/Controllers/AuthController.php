@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,27 +10,27 @@ class AuthController
 {
     public function login()
     {
-        return view('auth/form');
+        return view('auth.form');
     }
 
     public function handleLogin(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => ['required'],
-            'password' => ['required', 'min:5'],
+        $data = $request->validate([
+            'email' => ['email', 'required', 'exists:users'],
+            'password' => ['required', 'min:10'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($data)) {
             $user = Auth::user();
             if (Hash::needsRehash($user->password)) {
-                $user->password = Hash::make($credentials['password']);
+                $user->password = Hash::make($data['password']);
                 $user->save();
             }
             $request->session()->regenerate();
-            return redirect()->route('admin');
+            return redirect()->route('admin.index');
         }
         return back()->withErrors([
-            'error' => 'Not email or password'
+            'error' => 'Not email or password',
         ]);
     }
 

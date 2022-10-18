@@ -15,6 +15,7 @@
                     </ol>
                 </div>
             </div>
+            <a class="list-group-item list-group-item-action" href="{{ route('authLogout') }}">Logout</a>
         </div><!-- /.container-fluid -->
     </section>
 

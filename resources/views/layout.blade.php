@@ -35,6 +35,9 @@
                         <li class="nav-item" style="margin-left: auto; margin-right: 0">
                             <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
                         </li>
+                        <li class="nav-item" style="margin-left: auto; margin-right: 0">
+                            <a class="nav-link" href="{{route('authLogin')}}">Login</a>
+                        </li>
 
 
                     </ul>
