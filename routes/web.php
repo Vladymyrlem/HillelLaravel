@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminMainController;
+use app\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -43,16 +44,19 @@ Route::middleware(['auth'])->group(function () {
     /*Admin Page Router*/
     Route::get('/admin', [AdminMainController::class, 'index'])->name('admin.index');
 /*Category Router*/
-Route::get('admin/categories', [AdminCategoryController::class, 'index'])->name('adminCategory');
-Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->name('adminCategoryCreate');
-Route::post('/admin/categories/store', [AdminCategoryController::class, 'store'])->name('adminCategoryStore');
-Route::get('/admin/categories/edit/{id}', [AdminCategoryController::class, 'edit'])->name('adminCategoryEdit');
-Route::put('/admin/categories/update/{id}', [AdminCategoryController::class, 'update'])->name('adminCategoryUpdate');
-Route::get('/admin/categories/delete/{id}', [AdminCategoryController::class, 'delete'])->name('adminCategoryDelete');
-Route::get('/admin/categories/trash', [AdminCategoryController::class, 'trash'])->name('adminCategoryTrash');
-Route::get('/admin/categories/restore/{id}', [AdminCategoryController::class, 'restore'])->name('adminCategoryRestore');
-Route::get('/admin/categories/forceDelete/{id}', [AdminCategoryController::class, 'forceDelete'])->name('adminCategoryForceDelete');
-Route::get('/admin/categories/{categoryId}', [AdminCategoryController::class, 'show'])->name('adminCategoryShow');
+    Route::prefix('admin')->group(function (){
+        Route::get('/categories', [AdminCategoryController::class, 'index'])->name('adminCategory');
+        Route::get('/categories/create', [AdminCategoryController::class, 'create'])->name('adminCategoryCreate');
+        Route::post('/categories/store', [AdminCategoryController::class, 'store'])->name('adminCategoryStore');
+        Route::get('/categories/edit/{id}', [AdminCategoryController::class, 'edit'])->name('adminCategoryEdit');
+        Route::put('/categories/update/{id}', [AdminCategoryController::class, 'update'])->name('adminCategoryUpdate');
+        Route::get('/categories/delete/{id}', [AdminCategoryController::class, 'delete'])->name('adminCategoryDelete');
+        Route::get('categories/trash', [AdminCategoryController::class, 'trash'])->name('adminCategoryTrash');
+        Route::get('/categories/restore/{id}', [AdminCategoryController::class, 'restore'])->name('adminCategoryRestore');
+        Route::get('/categories/forceDelete/{id}', [AdminCategoryController::class, 'forceDelete'])->name('adminCategoryForceDelete');
+        Route::get('/categories/{categoryId}', [AdminCategoryController::class, 'show'])->name('adminCategoryShow');
+    });
+
 
 /*Tag Router*/
 Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('adminTag');
