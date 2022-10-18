@@ -28,8 +28,20 @@ Route::get('/author', [AuthorController::class, 'index'])->name('author');
 Route::get('/author/{authorId}', [AuthorController::class, 'show'])->name('author.show');
 Route::get('/author/{authorId}/category/{categoryId}', [AuthorController::class, 'category'])->name('authorCategory');
 Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorController::class, 'categoryTag'])->name('authorCategoryTag');
-Route::get('/admin', [AdminMainController::class, 'index'])->name('admin.index');
 
+
+
+/* block Auth */
+Route::middleware(['guest'])->group(function () {
+    Route::get('auth/login', [AuthController::class, 'login'])->name('authLogin');
+    Route::post('auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
+});
+Route::get('auth/logout', [AuthController::class, 'logout'])->name('authLogout')->middleware('auth');
+
+/*Admin Routing group*/
+Route::middleware(['auth'])->group(function () {
+    /*Admin Page Router*/
+    Route::get('/admin', [AdminMainController::class, 'index'])->name('admin.index');
 /*Category Router*/
 Route::get('admin/categories', [AdminCategoryController::class, 'index'])->name('adminCategory');
 Route::get('/admin/categories/create', [AdminCategoryController::class, 'create'])->name('adminCategoryCreate');
@@ -65,3 +77,4 @@ Route::get('/admin/post/trash', [AdminPostController::class, 'trash'])->name('ad
 Route::get('/admin/post/restore/{id}', [AdminPostController::class, 'restore'])->name('adminPostRestore');
 Route::get('/admin/post/forceDelete/{id}', [AdminPostController::class, 'forceDelete'])->name('adminPostForceDelete');
 Route::get('/admin/post/{id}', [AdminPostController::class, 'show'])->name('adminPostShow')->whereNumber('id');
+});
