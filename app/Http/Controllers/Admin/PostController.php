@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class AdminPostController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.

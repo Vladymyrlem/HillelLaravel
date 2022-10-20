@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class AdminTagController extends Controller
+class TagController extends Controller
 {
 
     /**

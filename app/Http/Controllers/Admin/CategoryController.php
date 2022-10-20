@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategory;
 use Illuminate\Http\Request;
 
-class AdminCategoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
