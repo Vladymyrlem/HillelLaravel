@@ -33,15 +33,19 @@ Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorControll
 
 
 /* block Auth */
-Route::middleware(['guest'])->group(function () {
-    Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
-    Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
-});
-
-Route::get('auth/logout', [AuthController::class, 'logout'])->name('authLogout')->middleware('auth');
+//Route::middleware(['guest'])->group(function () {
+//
+//});
+//Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
+//Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
+Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin')
+    ->middleware('guest');
+Route::post('/auth/login', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
 
 /*Admin Routing group*/
 Route::middleware(['auth'])->group(function () {
+    Route::get('/auth/logout', [AuthController::class, 'logout'])->name('authLogout');
+
     /*Admin Page Router*/
     Route::get('/admin', [AdminMainController::class, 'index'])->name('admin.index');
     /*Category Router*/

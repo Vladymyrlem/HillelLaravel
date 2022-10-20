@@ -39,6 +39,6 @@ class AuthController
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('main');
+        return redirect()->route('home');
     }
 }
