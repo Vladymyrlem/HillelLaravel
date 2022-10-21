@@ -8,27 +8,40 @@
 @section('content')
 
     <div class="container">
-    <form action="" method="post">
-        @csrf
+        <form action="{{ route('authHandleLogin') }}" method="post">
+            @csrf
+            @if ($errors->has('email'))
+                @foreach($errors->get('email') as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            @endif
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
+                       autofocus>
 
-        @if($errors->has('error'))
-            @foreach($errors->get('error') as $error)
-
-            <div class="alert alert-danger mt-3" role="alert">
-                    {{ $error }}
             </div>
-            @endforeach
-        @endif
+            @if ($errors->has('password'))
+                @foreach($errors->get('password') as $error)
+                    <span class="text-danger">{{ $error }}</span>
+                @endforeach
+            @endif
+            <div class="form-group mb-3">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password" class="form-control" name="password"
+                       required>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ old('email','') }}">
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+            </div>
+            <div class="form-group mb-3">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> Remember Me
+                    </label>
+                </div>
+            </div>
+            <div class="d-grid mx-auto">
+                <button type="submit" class="btn btn-dark btn-block">Signin</button>
+            </div>
+        </form>
     </div>
 @endsection

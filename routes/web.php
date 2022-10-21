@@ -33,14 +33,15 @@ Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorControll
 
 
 /* block Auth */
-//Route::middleware(['guest'])->group(function () {
-//
-//});
+Route::middleware(['guest'])->group(function () {
+Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
+Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
+});
 //Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
 //Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
-Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin')
-    ->middleware('guest');
-Route::post('/auth/login', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
+//Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin')
+//    ->middleware('guest');
+//Route::post('/auth/login', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
 
 /*Admin Routing group*/
 Route::middleware(['auth'])->group(function () {
@@ -61,7 +62,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/categories/forceDelete/{id}', [CategoryController::class, 'forceDelete'])->name('adminCategoryForceDelete');
         Route::get('/categories/{categoryId}', [CategoryController::class, 'show'])->name('adminCategoryShow');
     });
-
 
     /*Tag Router*/
     Route::get('/admin/tags', [TagController::class, 'index'])->name('adminTag');

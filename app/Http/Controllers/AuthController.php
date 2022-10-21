@@ -17,7 +17,7 @@ class AuthController
     {
         $data = $request->validate([
             'email' => ['email', 'required', 'exists:users'],
-            'password' => ['required', 'min:10'],
+            'password' => ['required', 'min:5'],
         ]);
 
         if (Auth::attempt($data)) {
@@ -26,7 +26,7 @@ class AuthController
                 $user->password = Hash::make($data['password']);
                 $user->save();
             }
-            $request->session()->regenerate();
+            //$request->session()->regenerate();
             return redirect()->route('admin.index');
         }
         return back()->withErrors([
