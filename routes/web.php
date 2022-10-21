@@ -3,9 +3,9 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
-//use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoryController as MyCategoryController;
 use App\Http\Controllers\HomeController;
-//use App\Http\Controllers\TagController;
+use App\Http\Controllers\TagController as MyTagController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
@@ -37,11 +37,6 @@ Route::middleware(['guest'])->group(function () {
 Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
 Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
 });
-//Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
-//Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
-//Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin')
-//    ->middleware('guest');
-//Route::post('/auth/login', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
 
 /*Admin Routing group*/
 Route::middleware(['auth'])->group(function () {
