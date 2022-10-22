@@ -134,4 +134,17 @@ class PostController extends Controller
         return redirect()->route('adminPostTrash');
 
     }
+
+    public function files(Product $product, Request $request)
+    {
+        $request->validate([
+            'file' => 'required|image|max:2048'
+        ]);
+
+        $url = Storage::put('posts', $request->file('file'));
+
+        $product->images()->create([
+            'url' => $url
+        ]);
+    }
 }

@@ -34,4 +34,12 @@ class Post extends Model
     {
         return $this->belongsToMany(Tag::class, 'post2tag')->withTimestamps();
     }
+
+    /**
+     * Get the post's image.
+     */
+    public function images()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

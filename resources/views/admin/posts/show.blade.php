@@ -24,6 +24,12 @@
                     </a>
                 @endforeach
             </th>
+            <th scope="col">   @foreach ($post->images as $image)
+                    <li data-thumb="{{ '/storage/'.($image->url)}}">
+                        <img  src="{{ '/storage/'.($image->url)}}" />
+                    </li>
+                @endforeach
+            </th>
             <th scope="col">{{ $post->created_at }}</th>
             <th scope="col">{{ $post->updated_at }}</th>
         </tr>
