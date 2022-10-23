@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Category;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 class PostController extends Controller
 {
 
@@ -75,7 +76,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        if(!$request->user()->can('store', Post::class)){
+        if (!$request->user()->can('store', Post::class)) {
             abort(403);
         }
         $request->validate([
@@ -101,7 +102,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $this->authorize('update',$post);
+        $this->authorize('update', $post);
         $categories = Category::all();
         $tags = Tag::all();
         $users = User::all();
@@ -133,7 +134,7 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $post =  Post::find($id)->delete();
+        $post = Post::find($id)->delete();
 //        $this->authorize('delete', $post);
         $post->delete();
         return redirect()->route('adminPost');

@@ -67,21 +67,21 @@
                                                     <a href="{{ route('author.show', ['authorId' => $post->users->id])  }}">{{ $post->users->name }}</a>
                                                 </td>
                                                 <td>@forelse($post->tags as $tag)
-                                                     <a href="{{ route('adminTagShow',$tag->slug) }}">
-                                                         {!! $tag->title . '<br>' !!}
-                                                     </a>
-                                                         @empty
+                                                        <a href="{{ route('adminTagShow',$tag->slug) }}">
+                                                            {!! $tag->title . '<br>' !!}
+                                                        </a>
+                                                    @empty
                                                             <?php echo 'Tags Not Found'; ?>
                                                         <br><a href="{{route('adminPostEdit',$post->id)}}">Do you want
                                                             to add tag</a>
                                                     @endforelse
                                                 </td>
-{{--                                                <td>--}}
-{{--                                                        <div data-thumb="{{ '/images/'.($post->images->url)}}">--}}
-{{--                                                            <img alt="{{ $post->images->title }}" src="{{ '/images/'.($post->images->url)}}" />--}}
-{{--                                                        </div>--}}
+                                                {{--                                                <td>--}}
+                                                {{--                                                        <div data-thumb="{{ '/images/'.($post->images->url)}}">--}}
+                                                {{--                                                            <img alt="{{ $post->images->title }}" src="{{ '/images/'.($post->images->url)}}" />--}}
+                                                {{--                                                        </div>--}}
 
-{{--                                                </td>       --}}
+                                                {{--                                                </td>       --}}
                                                 <td>{{ $post->created_at }}</td>
                                                 <td>{{ $post->updated_at }}</td>
                                                 <td>

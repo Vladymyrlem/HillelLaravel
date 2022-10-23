@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Post;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -21,10 +21,10 @@ class AuthorPostsFactory extends Factory
             'posts_id' => function (array $attributes) {
                 return $attributes['posts_type']::factory();
             },
-        'posts_type' => $this->faker->randomElement([
-        'App\Models\Post'
-       ]
-        ),
+            'posts_type' => $this->faker->randomElement([
+                    'App\Models\Post'
+                ]
+            ),
             'updated_at' => $this->faker->dateTime('now')
         ];
     }

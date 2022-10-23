@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\Image;
-use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +12,7 @@ class PostController extends Controller
     {
         $posts = Post::with('categories')->orderBy('id', 'desc')->paginate(2);
         $images = Image::all();
-        return view('post.index', compact('posts','images'));
+        return view('post.index', compact('posts', 'images'));
     }
 
     public function show($slug)

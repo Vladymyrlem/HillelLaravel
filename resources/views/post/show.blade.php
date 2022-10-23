@@ -26,7 +26,7 @@
             </th>
             <th scope="col">   @foreach ($post->images as $image)
                     <div data-thumb="{{ '/images/'.($image->url)}}">
-                        <img alt="{{ $image->title }}" src="{{ '/images/'.($image->url)}}" />
+                        <img alt="{{ $image->title }}" src="{{ '/images/'.($image->url)}}"/>
                     </div>
                 @endforeach
             </th>

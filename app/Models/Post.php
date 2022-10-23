@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use ChristianKuri\LaravelFavorite\Traits\Favoriteable;
 
 class Post extends Model
 {
