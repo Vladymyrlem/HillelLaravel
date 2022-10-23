@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\CategoryController as MyCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TagController as MyTagController;
+use App\Http\Controllers\PostController as MyPostController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
@@ -31,6 +32,8 @@ Route::get('/author/{authorId}', [AuthorController::class, 'show'])->name('autho
 Route::get('/author/{authorId}/category/{categoryId}', [AuthorController::class, 'category'])->name('authorCategory');
 Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorController::class, 'categoryTag'])->name('authorCategoryTag');
 
+Route::get('/post', [MyPostController::class, 'index'])->name('myPost');
+Route::get('/post/{id}', [MyPostController::class, 'show'])->name('myPostShow')->whereNumber('id');
 
 /* block Auth */
 Route::middleware(['guest'])->group(function () {
@@ -79,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/post/delete/{id}', [PostController::class, 'delete'])->name('adminPostDelete');
     Route::get('/admin/post/trash', [PostController::class, 'trash'])->name('adminPostTrash');
     Route::get('/admin/post/restore/{id}', [PostController::class, 'restore'])->name('adminPostRestore');
-    Route::get('/admin/post/forceDelete/{id}', [PostController::class, 'forceDelete'])->name('adminPostForceDelete');
+    Route::get('/admin/post/forceDelete/{id}', [PostController::class, 'forceDelete'])->name('adminPostForceDelete')
+        ->can('delete','App/Models/Post');
     Route::get('/admin/post/{id}', [PostController::class, 'show'])->name('adminPostShow')->whereNumber('id');
 });

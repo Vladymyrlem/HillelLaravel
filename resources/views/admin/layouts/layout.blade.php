@@ -20,7 +20,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav w-100">
                         <li class="nav-item">
                             <a class="nav-link" href="/author">Authors</a>
                         </li>
@@ -36,6 +36,22 @@
                         <li class="nav-item" style="margin-left: auto; margin-right: 0">
                             <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
                         </li>
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('authLogin') }}">{{ __('Login') }}</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-item" href="{{ route('authLogout') }}">
+                                    {{ __('Logout') }}
+                                </a>
+                            </li>
+                        @endguest
                     </ul>
                 </div>
             </div>

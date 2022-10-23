@@ -9,9 +9,27 @@ use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Auth;
 class PostController extends Controller
 {
+
+    protected $user;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+
+            $this->user = Auth::user();
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,6 +60,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
         $categories = Category::all();
         $tags = Tag::all();
         $users = User::all();
@@ -56,6 +75,9 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        if(!$request->user()->can('store', Post::class)){
+            abort(403);
+        }
         $request->validate([
             'user_id' => ['required'],
             'tags_id' => ['required'],
@@ -79,6 +101,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $this->authorize('update',$post);
         $categories = Category::all();
         $tags = Tag::all();
         $users = User::all();
@@ -110,7 +133,9 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        Post::find($id)->delete();
+        $post =  Post::find($id)->delete();
+//        $this->authorize('delete', $post);
+        $post->delete();
         return redirect()->route('adminPost');
     }
 
@@ -135,7 +160,7 @@ class PostController extends Controller
 
     }
 
-    public function files(Product $product, Request $request)
+    public function files(Post $post, Request $request)
     {
         $request->validate([
             'file' => 'required|image|max:2048'
@@ -143,7 +168,7 @@ class PostController extends Controller
 
         $url = Storage::put('posts', $request->file('file'));
 
-        $product->images()->create([
+        $post->images()->create([
             'url' => $url
         ]);
     }

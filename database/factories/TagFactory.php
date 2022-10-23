@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use App\Models\Post;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
@@ -20,5 +20,6 @@ class TagFactory extends Factory
             'title' => fake()->text(rand(7, 10)),
             'slug' => fake()->word(),
         ];
+
     }
 }

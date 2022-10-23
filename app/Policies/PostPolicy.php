@@ -5,10 +5,24 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class PostPolicy
 {
     use HandlesAuthorization;
+
+    /**
+     *  Authentication check
+     * @return bool
+     */
+    public function login():bool
+    {
+        if (Auth::user() === null) {
+            return false;
+        }
+        return true;
+    }
+
 
     /**
      * Determine whether the user can view any models.
@@ -18,7 +32,7 @@ class PostPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +44,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        //
+        return $user->id = $post->user_id;
     }
 
     /**
@@ -41,7 +55,18 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->id === 2;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function store(User $user)
+    {
+        return $user->role_name === 'admin';
     }
 
     /**
@@ -53,7 +78,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        //
+        return $user->id = $post->user_id || $user->role_name === 'admin';
     }
 
     /**
@@ -65,7 +90,7 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        return $user->id === $post->user_id;
     }
 
     /**

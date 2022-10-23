@@ -24,13 +24,13 @@ return new class extends Migration {
             $table->foreign('category_id')->references('id')->on('categories');
         });
 
-//        Schema::create('tags', function (Blueprint $table) {
-//            $table->id();
-//            $table->string('title');
-//            $table->string('slug');
-//            $table->timestamps();
-//            $table->softDeletes();
-//        });
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('slug');
+            $table->timestamps();
+            $table->softDeletes();
+        });
 
         Schema::create('post2tag', function (Blueprint $table) {
             $table->id();

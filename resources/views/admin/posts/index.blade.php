@@ -29,8 +29,11 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            @can('create', \App\Models\Post::class)
                             <a href="{{ route('adminPostCreate') }}" class="btn btn-primary mb-3">Add Post</a>
-                            <a href="{{ route('adminPostTrash') }}" class="btn btn-primary mb-3">Posts Trash</a>
+                            @endcan
+                                <a href="{{ route('adminPostTrash') }}" class="btn btn-primary mb-3">Posts Trash</a>
+
                             @if (count($posts))
                                 <div class="table-responsive">
                                     <table class="table table-bordered table-dark table-hover text-wrap">
@@ -76,15 +79,18 @@
                                                 <td>{{ $post->created_at }}</td>
                                                 <td>{{ $post->updated_at }}</td>
                                                 <td>
+                                                    @can('update', $post)
                                                     <a href="{{ route('adminPostEdit', ['id' => $post->id]) }}"
                                                        class="btn btn-info btn-sm float-left mr-1">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
-
-                                                    <a href="{{ route('adminPostDelete', ['id' => $post->id]) }}"
+                                                    @endcan
+                                                        @can('delete', $post)
+                                                        <a href="{{ route('adminPostDelete', ['id' => $post->id]) }}"
                                                        class="btn btn-danger btn-sm">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
+                                                            @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -92,7 +98,7 @@
                                     </table>
                                 </div>
                             @else
-                                <p>Статей пока нет...</p>
+                                <p>Posts Not Found...</p>
                             @endif
                         </div>
                         <!-- /.card-body -->
