@@ -37,7 +37,7 @@
                 <td>{{ $auth->created_at }}</td>
                 <td>{{ $auth->updated_at }}</td>
                 <td><a href="/author/{{ $auth->id }}">Show</a></td>
-                <td><a href="/author/{{ $auth->id }}">Add to Favorite</a></td>
+                {{--                <td><a href="/author/{{ $auth->id }}">Add to Favorite</a></td>--}}
             </tr>
         @endforeach
         </tbody>

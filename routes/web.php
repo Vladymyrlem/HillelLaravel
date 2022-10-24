@@ -1,14 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\MainController;
-use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PostController as MyPostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\CategoryController as MyCategoryController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TagController as MyTagController;
+use App\Http\Controllers\PostController as MyPostController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +37,8 @@ Route::get('/post/{id}', [MyPostController::class, 'show'])->name('myPostShow')-
 
 /* block Auth */
 Route::middleware(['guest'])->group(function () {
-    Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
-    Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
+Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');
+Route::post('/auth/handleLogin', [AuthController::class, 'handleLogin'])->name('authHandleLogin');
 });
 
 /*Admin Routing group*/
@@ -81,6 +83,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/post/trash', [PostController::class, 'trash'])->name('adminPostTrash');
     Route::get('/admin/post/restore/{id}', [PostController::class, 'restore'])->name('adminPostRestore');
     Route::get('/admin/post/forceDelete/{id}', [PostController::class, 'forceDelete'])->name('adminPostForceDelete')
-        ->can('delete', 'App/Models/Post');
+        ->can('delete','App/Models/Post');
     Route::get('/admin/post/{id}', [PostController::class, 'show'])->name('adminPostShow')->whereNumber('id');
 });
