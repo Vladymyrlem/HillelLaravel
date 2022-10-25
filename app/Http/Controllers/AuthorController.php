@@ -12,13 +12,15 @@ class AuthorController extends Controller
     public function index()
     {
         $author = User::all();
-        return view('author/index', compact('author'));
+        $posts = Post::with('users', 'categories');
+        return view('author/index', compact('author', 'posts'));
     }
 
     public function show($authorId)
     {
         $author = User::find($authorId);
-        return view('author/show', ['author' => $author]);
+        $posts = Post::with('users');
+        return view('author/show', ['author' => $author, 'posts' => $posts]);
     }
 
     public function category($authorId, $categoryId)

@@ -14,10 +14,8 @@ return new class extends Migration {
     {
         Schema::create('author_posts', function (Blueprint $table) {
             $table->integer("user_id");
-
-            $table->integer("posts_id");
-
-            $table->string("posts_type");
+            $table->string('author_posts_type');
+            $table->integer('author_posts_id');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('author_post');
+        Schema::dropIfExists('author_posts');
     }
 };

@@ -33,9 +33,9 @@
             <tr>
                 <th scope="row">{{ $index++ }}</th>
                 <th>{{ $post->title }}</th>
-                <td>{{ $post->users->name }}</td>
+                <td>{{ $author->name }}</td>
                 <td id="{{$post->categories->id}}"><a
-                        href="{{ route('authorCategory', ['authorId' => $post->users->id, 'categoryId' => $post->categories->id, ]) }}"
+                        href="{{ route('authorCategory', ['authorId' => $author->id, 'categoryId' => $post->categories->id, ]) }}"
                     >{{ $post->categories->title }}</a>
                 </td>
                 <td>{{ $post->body }}</td>

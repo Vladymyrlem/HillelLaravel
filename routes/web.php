@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\MainController;
-
+use App\Models\User;
+use App\Models\Post;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -74,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/tags/{id}', [TagController::class, 'show'])->name('adminTagShow');
 
     /*Posts Router*/
+
     Route::get('/admin/post', [PostController::class, 'index'])->name('adminPost');
     Route::get('/admin/post/create', [PostController::class, 'create'])->name('adminPostCreate');
     Route::post('/admin/post/store', [PostController::class, 'store'])->name('adminPostStore');
