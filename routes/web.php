@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\MainController;
 use App\Models\User;
 use App\Models\Post;
+use App\Http\Controllers\Oauth\GitHubController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,7 +27,7 @@ use App\Models\Post;
 
 /*Home Page. List Posts*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::get('/oauth/github/callback', GitHubController::class)->name('oauth.github.callback');
 /*Author routers group*/
 Route::get('/author', [AuthorController::class, 'index'])->name('author');
 Route::get('/author/{authorId}', [AuthorController::class, 'show'])->name('author.show');
@@ -35,6 +36,7 @@ Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorControll
 
 Route::get('/post', [MyPostController::class, 'index'])->name('myPost');
 Route::get('/post/{id}', [MyPostController::class, 'show'])->name('myPostShow')->whereNumber('id');
+
 
 /* block Auth */
 Route::middleware(['guest'])->group(function () {
