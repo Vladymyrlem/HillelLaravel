@@ -30,7 +30,7 @@ class GitHubController
         parse_str($response->body(), $data);
 
         if (!isset($data['access_token'])) {
-            return redirect()->route('auth.login');
+            return redirect()->route('authLogin');
         }
 
         $user = Http::withHeaders([
@@ -38,9 +38,9 @@ class GitHubController
         ])->get('https://api.github.com/user');
 
         if (!$this->createUser($user->json())) {
-            return redirect()->route('auth.login');
+            return redirect()->route('authLogin');
         }
-        return redirect()->route('admin.panel');
+        return redirect()->route('admin.index');
     }
 
     /**

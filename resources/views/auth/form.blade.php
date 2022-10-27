@@ -43,7 +43,7 @@
                 <button type="submit" class="btn btn-dark btn-block">Signin</button>
             </div>
             <div class="d-grid mx-auto">
-                <a class="nav-link" href="{{ $urlGithub }}">Github</a>
+                <a class="nav-link" href="{{ $urlGitHub }}">Github</a>
             </div>
         </form>
     </div>
