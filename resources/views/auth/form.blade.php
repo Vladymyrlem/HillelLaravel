@@ -42,6 +42,9 @@
             <div class="d-grid mx-auto">
                 <button type="submit" class="btn btn-dark btn-block">Signin</button>
             </div>
+            <div class="d-grid mx-auto">
+                <a class="nav-link" href="{{ $urlGithub }}">Github</a>
+            </div>
         </form>
     </div>
 @endsection
