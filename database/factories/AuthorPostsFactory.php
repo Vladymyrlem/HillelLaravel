@@ -35,30 +35,30 @@ class AuthorPostsFactory extends Factory
         ];
     }
 
-//    public function forPosts()
-//    {
-//        return $this->state(function (array $attributes) {
-//            return [
-//                'author_posts_type' => $this->post->getMorphClass(),
-//                'author_posts_id' => function (array $attributes) {
-//                    return $attributes['author_posts_type']::factory();
-//                },
-//            ];
-//        });
-//    }
-//
-//    public function forUser()
-//    {
-//        return $this->state(function (array $attributes){
-//            return [
-//                'author_posts_type' => $this->faker->randomElement([
-//                        'App\Models\Post'
-//                    ]
-//                ),
-//                'user_id' => function (array $attributes) {
-//                    return $attributes['posts_type']::factory();
-//                },
-//            ];
-//        });
-//    }
+    public function forPosts()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'author_posts_type' => $this->post->getMorphClass(),
+                'author_posts_id' => function (array $attributes) {
+                    return $attributes['author_posts_type']::factory();
+                },
+            ];
+        });
+    }
+
+    public function forUser($user)
+    {
+        return $this->state(function (array $attributes) use($user){
+            return [
+                'author_posts_type' => $this->user->faker->randomElement([
+                        'App\Models\Post'
+                    ]
+                ),
+                'user_id' => function (array $attributes) {
+                    return $attributes['posts_type']::factory();
+                },
+            ];
+        });
+    }
 }

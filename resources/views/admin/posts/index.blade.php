@@ -69,7 +69,9 @@
                                                     <a href="{{ route('author.show', ['authorId' => $post->users->id])  }}">{{ $post->users->name }}</a>
                                                 </td>
                                                 <td>@forelse($post->tags as $tag)
+                                                        <a href="{{route('adminTagShow',$tag->slug)}}">
                                                         {!! $tag->title . '<br>' !!}
+                                                        </a>
                                                     @empty
                                                             <?php echo 'Tags Not Found'; ?>
                                                         <br><a href="{{route('adminPostEdit',$post->id)}}">Do you want

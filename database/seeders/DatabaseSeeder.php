@@ -35,19 +35,9 @@ class DatabaseSeeder extends Seeder
             $post->save();
         });
 
-//        $userNotes = User::factory(10)->create();
-//        $complexNotes = Post::factory()->count(10)->create();
-//        $faker = Faker::create();
-//        foreach (range(1,10) as $index) {
-//            DB::table('author_posts')->insert([
-//                'user_id' => $users->random(rand(1,10)),
-//                'author_posts_id' => function (array $attributes) {
-//                    return $attributes['author_posts_type']::factory();
-//                },
-//                'author_posts_type' => $posts->getQueueableModelClass,
-//                'created_at' => $faker->dateTime('now'),
-//                'updated_at' => $faker->dateTime('now')
-//            ]);
-//        }
+        $userNotes = User::factory()->forUser($users)->count(10)->create();
+        $complexNotes = Post::factory()->forPosts()->count(10)->create();
+        $userNotes->save();
+        $complexNotes->save();
     }
 }

@@ -10,20 +10,6 @@ use Illuminate\Support\Facades\Auth;
 class PostPolicy
 {
     use HandlesAuthorization;
-
-    /**
-     *  Authentication check
-     * @return bool
-     */
-    public function login(): bool
-    {
-        if (Auth::user() === null) {
-            return false;
-        }
-        return true;
-    }
-
-
     /**
      * Determine whether the user can view any models.
      *
