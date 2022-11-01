@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Oauth;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
-use Exception;
 
 class GitHubController
 {

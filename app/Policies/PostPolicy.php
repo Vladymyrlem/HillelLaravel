@@ -5,11 +5,11 @@ namespace App\Policies;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\Auth;
 
 class PostPolicy
 {
     use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      *

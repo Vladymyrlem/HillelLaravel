@@ -70,7 +70,7 @@
                                                 </td>
                                                 <td>@forelse($post->tags as $tag)
                                                         <a href="{{route('adminTagShow',$tag->slug)}}">
-                                                        {!! $tag->title . '<br>' !!}
+                                                            {!! $tag->title . '<br>' !!}
                                                         </a>
                                                     @empty
                                                             <?php echo 'Tags Not Found'; ?>

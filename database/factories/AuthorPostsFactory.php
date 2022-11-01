@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -22,7 +22,7 @@ class AuthorPostsFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->random(1,10),
+            'user_id' => $this->faker->random(1, 10),
             'author_posts_id' => function (array $attributes) {
                 return $attributes['author_posts_type']::factory();
             },
@@ -49,7 +49,7 @@ class AuthorPostsFactory extends Factory
 
     public function forUser($user)
     {
-        return $this->state(function (array $attributes) use($user){
+        return $this->state(function (array $attributes) use ($user) {
             return [
                 'author_posts_type' => $this->user->faker->randomElement([
                         'App\Models\Post'
