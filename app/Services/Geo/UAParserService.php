@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Services\Geo;
+namespace App\Services\Geo;
 
 use Illuminate\Support\Facades\Http;
 
@@ -9,20 +9,20 @@ class UAParserService implements UserAgentServiceInterface
     protected $data;
 
 
-    public function parse(string $ua): void
+    public function parse(string $ip): void
     {
-        $response = Http::get($this->getUrl($ua));
+        $response = Http::get($this->getUrl($ip));
         $this->data = $response->json();
     }
 
     public function browser(): ?string
     {
-        return $this->data['browser'] ?? null;
+        return $this->data['region'] ?? null;
     }
 
     public function os(): ?string
     {
-        return $this->data['os'] ?? null;
+        return $this->data['country'] ?? null;
     }
 
     /**

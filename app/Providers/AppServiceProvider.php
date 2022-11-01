@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Geo\UAParserService;
+use App\Services\Geo\UserAgentServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(UserAgentServiceInterface::class, function () {
+            return new UAParserService();
+//            return new IpApiGeoService();
+        });
     }
 
     /**

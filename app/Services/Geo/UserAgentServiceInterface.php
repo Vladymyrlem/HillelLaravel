@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Services\Geo;
+namespace App\Services\Geo;
 
 interface UserAgentServiceInterface
 {
-    public function parse(string $ua): void;
+    public function parse(string $ip): void;
     public function browser(): ?string;
     public function os(): ?string;
 }

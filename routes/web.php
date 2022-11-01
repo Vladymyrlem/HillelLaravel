@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\GeoIpController;
 use App\Models\User;
 use App\Models\Post;
 use App\Http\Controllers\Oauth\GitHubController;
@@ -37,6 +38,7 @@ Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorControll
 Route::get('/post', [MyPostController::class, 'index'])->name('myPost');
 Route::get('/post/{id}', [MyPostController::class, 'show'])->name('myPostShow')->whereNumber('id');
 
+Route::get('/geo', [GeoIpController::class, 'index']);
 
 /* block Auth */
 Route::middleware(['guest'])->group(function () {

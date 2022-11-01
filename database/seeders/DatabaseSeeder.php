@@ -35,9 +35,9 @@ class DatabaseSeeder extends Seeder
             $post->save();
         });
 
-        $userNotes = User::factory()->forUser($users)->count(10)->create();
-        $complexNotes = Post::factory()->forPosts()->count(10)->create();
-        $userNotes->save();
-        $complexNotes->save();
+//        $userNotes = User::factory()->forUser($users)->count(10)->create();
+//        $complexNotes = Post::factory()->forPosts()->count(10)->create();
+//        $userNotes->save();
+//        $complexNotes->save();
     }
 }

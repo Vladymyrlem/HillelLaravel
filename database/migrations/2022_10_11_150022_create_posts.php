@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 return new class extends Migration {
     /**
@@ -11,17 +12,17 @@ return new class extends Migration {
      */
     public function up()
     {
-//        Schema::create('posts', function (Blueprint $table) {
-//            $table->id();
-//            $table->foreignId('user_id');
-//            $table->foreignId('category_id');
-//            $table->string('title');
-//            $table->text('body');
-//            $table->timestamps();
-//            $table->softDeletes();
-//            $table->foreign('user_id')->references('id')->on('users');
-//            $table->foreign('category_id')->references('id')->on('categories');
-//        });
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('category_id');
+            $table->string('title');
+            $table->text('body');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('category_id')->references('id')->on('categories');
+        });
     }
 
     /**
