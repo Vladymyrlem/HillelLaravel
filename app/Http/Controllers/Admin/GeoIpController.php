@@ -16,10 +16,8 @@ class GeoIpController extends Controller
         if ($ip == '127.0.0.1') {
             $ip = request()->server->get('HTTP_X_FORWARDED_FOR');
         }
-        $parser = new UserAgentParser();
-        $ua_info = $parser->parse();
-        $browser = $ua_info->browser();
-        $os = $ua_info->platform();
+        $browser = $reader->browser();
+        $os = $reader->os();
         if (!empty($browser) && !empty($os)) {
             Visit::create([
                 'ip' => $ip,

@@ -3,38 +3,26 @@
 namespace App\Services\Geo;
 
 use Illuminate\Support\Facades\Http;
+use donatj\UserAgent\UserAgentParser;
 
 class UAParserService implements UserAgentServiceInterface
 {
-    protected $data;
+    protected $userAgent;
 
-
-    public function parse(string $ip): void
+    public function __construct()
     {
-        $response = Http::get($this->getUrl($ip));
-        $this->data = $response->json();
+        $this->userAgent = new UserAgentParser();
+        $this->userAgent = $this->userAgent->parse();
     }
 
     public function browser(): ?string
     {
-        return $this->data['region'] ?? null;
+
+        return $this->userAgent->browser();
     }
 
     public function os(): ?string
     {
-        return $this->data['country'] ?? null;
-    }
-
-    /**
-     * @param string $ua
-     * @return string
-     */
-    protected function getUrl(string $ua): string
-    {
-        $url = 'http://ip-api.com/json/' . $ua;
-        $parameters = http_build_query([
-            'fields' => 'browser,os,query'
-        ]);
-        return $url . '?' . $parameters;
+        return $this->userAgent->platform();
     }
 }
