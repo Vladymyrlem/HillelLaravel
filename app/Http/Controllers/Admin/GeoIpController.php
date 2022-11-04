@@ -4,27 +4,42 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Visit;
-use App\Services\Geo\UserAgentServiceInterface;
+use Hudzhal\UserAgent\UserAgentServiceInterface;
+use Hillel\GeoInterface\GeoServiceInterface;
 use Illuminate\Support\Facades\Mail;
 
 class GeoIpController extends Controller
 {
+//    protected $ip;
+//    protected $ua;
+//
+//    /**
+//     * Create a new job instance.
+//     *
+//     * @param  string  $ip
+//     * @param  string  $ua
+//     */
+//    public function __construct(string $ip, string $ua)
+//    {
+//        $this->ip = $ip;
+//        $this->ua = $ua;
+//    }
 
-    public function index(UserAgentServiceInterface $reader)
+    public function index(UserAgentServiceInterface $uaAgentService,  GeoServiceInterface $geoService)
     {
                 $ip = '94.179.237.248';
-        if ($ip == '127.0.0.1') {
-            $ip = request()->server->get('HTTP_X_FORWARDED_FOR');
-        }
-        $browser = $reader->browser();
-        $os = $reader->os();
+        $geoService->parse($ip);
+        $uaAgentService->parse($ip);
         if (!empty($browser) && !empty($os)) {
+
+
             Visit::create([
-                'ip' => $ip,
-                'browser' => $browser,
-                'os' => $os,
+                'ip'             => $ip,
+                'continent_code' => $geoService->continentCode(),
+                'country_code'   => $geoService->countryCode(),
+                'browser'        => $uaAgentService->browser(),
+                'os'             => $uaAgentService->os(),
             ]);
         }
-        dd($ip, $os, $browser);
-    }
+}
 }
