@@ -2,7 +2,6 @@
 
 namespace App\Services\Geo;
 
-use Illuminate\Support\Facades\Http;
 use donatj\UserAgent\UserAgentParser;
 
 class UAParserService implements UserAgentServiceInterface
@@ -17,7 +16,6 @@ class UAParserService implements UserAgentServiceInterface
 
     public function browser(): ?string
     {
-
         return $this->userAgent->browser();
     }
 

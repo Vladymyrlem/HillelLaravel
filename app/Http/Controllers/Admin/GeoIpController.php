@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Visit;
 use App\Services\Geo\UserAgentServiceInterface;
-use donatj\UserAgent\UserAgentParser;
 
 class GeoIpController extends Controller
 {
