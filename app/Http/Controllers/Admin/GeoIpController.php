@@ -11,20 +11,20 @@ use Illuminate\Support\Facades\Mail;
 class GeoIpController extends Controller
 {
 
-    public function index(UserAgentServiceInterface $reader)
+    public function index(UserAgentServiceInterface $uaInfo)
     {
         $ip = '94.179.237.248';
         if($ip == '127.0.0.1') {
             $ip = request()->server->get('HTTP_X_FORWARDED_FOR');
         }
-        $ua_info = $reader->parse($ip);
-        $browser = $ua_info->browser();
-        $os = $ua_info->platform();
+        $uaInfo->parse($ip);
+        $browser = $uaInfo->browser();
+        $os = $uaInfo->os();
         if (!empty($browser) && !empty($os)) {
             Visit::create([
                 'ip' => $ip,
-                'browser' => $ua_info->browser(),
-                'os' => $ua_info->platform(),
+                'browser' => $uaInfo->browser(),
+                'os' => $uaInfo->os(),
             ]);
         }
         dd($ip, $os, $browser);
