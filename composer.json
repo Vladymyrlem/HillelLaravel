@@ -8,14 +8,13 @@
         "php": "^7.3|^8.0.2",
         "barryvdh/laravel-debugbar": "^3.7",
         "christiankuri/laravel-favorite": "^1.4",
-        "donatj/phpuseragentparser": "^1.7",
         "geoip2/geoip2": "~2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "hudzhal/geoserv1": "^2.0",
-        "hudzhal/geoserv2": "^1.0.0",
+        "hudzhal/geoserv1": "*",
+        "hudzhal/geoserv2": "dev-main",
         "hudzhal/hudzhalua-serv": "^1.0.0"
     },
     "require-dev": {
@@ -54,6 +53,20 @@
             "@php artisan key:generate --ansi"
         ]
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Vladymyrlem/geoserv1"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Vladymyrlem/geoserv2"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/Vladymyrlem/geointerface"
+        }
+    ],
     "extra": {
         "laravel": {
             "dont-discover": []
