@@ -3,8 +3,8 @@
 namespace App\Services\Geo;
 
 
-use Illuminate\Support\Facades\Http;
 use Hillel\GeoInterface\GeoServiceInterface;
+use Illuminate\Support\Facades\Http;
 
 class IpApiGeoService implements GeoServiceInterface
 {
@@ -12,13 +12,14 @@ class IpApiGeoService implements GeoServiceInterface
 
     public function parse($ip)
     {
-        $response = Http::get('http://ip-api.com/json/'. $ip .'?fields=continentCode,countryCode');
+        $response = Http::get('http://ip-api.com/json/' . $ip . '?fields=continentCode,countryCode');
 
         $this->data = $response->json();
     }
+
     public function continentCode()
     {
-        return $this ->data['continentCode'];
+        return $this->data['continentCode'];
     }
 
     public function countryCode()

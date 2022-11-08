@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Services\Geo\UAParserService;
-use App\Services\Geo\UserAgentServiceInterface;
+use Hudzhal\UserAgent\UAParserService;
+use Hudzhal\UserAgent\UserAgentServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
