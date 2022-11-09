@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Jobs\GeoUa;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -35,7 +37,7 @@ class DatabaseSeeder extends Seeder
             $post->save();
         });
         $faker = Factory::create();
-        for ($i = 0; $i<100 ; $i++)
+        for ($i = 0; $i < 100; $i++)
             GeoUa::dispatch($faker->ipv4, $faker->userAgent)->onQueue('parsing');
 //        $userNotes = User::factory()->forUser($users)->count(10)->create();
 //        $complexNotes = Post::factory()->forPosts()->count(10)->create();

@@ -35,9 +35,8 @@ Route::get('/author/{authorId}/category/{categoryId}/tag/{tag}', [AuthorControll
 Route::get('/post', [MyPostController::class, 'index'])->name('myPost');
 Route::get('/post/{id}', [MyPostController::class, 'show'])->name('myPostShow')->whereNumber('id');
 
-Route::get('/geo', [GeoIpController::class, 'index']);
-Route::get('/geo-ip', [GeoIpController::class, 'ipinfo']);
-
+//Route::get('/geo', [GeoIpController::class, 'index']);
+Route::get('/geo', GeoIpController::class)->name('geo-service');
 /* block Auth */
 Route::middleware(['guest'])->group(function () {
     Route::get('/auth/login', [AuthController::class, 'login'])->name('authLogin');

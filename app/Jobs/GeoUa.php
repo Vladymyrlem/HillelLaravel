@@ -3,10 +3,8 @@
 namespace App\Jobs;
 
 use App\Models\Visit;
-use Hillel\GeoInterface\GeoServiceInterface;
 use Hudzhal\UserAgent\UserAgentServiceInterface;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -22,10 +20,10 @@ class GeoUa implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  string  $ip
-     * @param  string  $ua
+     * @param string $ip
+     * @param string $ua
      */
-    public function __construct( string $ua, string  $ip)
+    public function __construct(string $ua, string $ip)
     {
         $this->ip = $ip;
         $this->ua = $ua;
@@ -34,18 +32,19 @@ class GeoUa implements ShouldQueue
     /**
      * Execute the job.
      *
-     * @param  UserAgentServiceInterface  $agentService
+     * @param UserAgentServiceInterface $agentService
      *
      * @return void
      */
     public function handle(UserAgentServiceInterface $agentService)
     {
-        $agentService->parse($this->ua);
+        $ua = request()->userAgent();
+        $agentService->parse($ua);
 
         Visit::create([
-            'ip'             => $this->ip,
-            'browser'        => $agentService->browser(),
-            'os'             => $agentService->os(),
+            'ip' => request()->getClientIp(),
+            'browser' => $agentService->browser(),
+            'os' => $agentService->os(),
         ]);
     }
 }
