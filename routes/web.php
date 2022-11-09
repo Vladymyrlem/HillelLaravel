@@ -36,6 +36,7 @@ Route::get('/post', [MyPostController::class, 'index'])->name('myPost');
 Route::get('/post/{id}', [MyPostController::class, 'show'])->name('myPostShow')->whereNumber('id');
 
 Route::get('/geo', [GeoIpController::class, 'index']);
+Route::get('/geo-ip', [GeoIpController::class, 'ipinfo']);
 
 /* block Auth */
 Route::middleware(['guest'])->group(function () {

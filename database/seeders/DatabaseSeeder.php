@@ -34,7 +34,9 @@ class DatabaseSeeder extends Seeder
             $post->tags()->attach($tags->random(rand(1, 10))->pluck('id'));
             $post->save();
         });
-
+        $faker = Factory::create();
+        for ($i = 0; $i<100 ; $i++)
+            GeoUa::dispatch($faker->ipv4, $faker->userAgent)->onQueue('parsing');
 //        $userNotes = User::factory()->forUser($users)->count(10)->create();
 //        $complexNotes = Post::factory()->forPosts()->count(10)->create();
 //        $userNotes->save();
