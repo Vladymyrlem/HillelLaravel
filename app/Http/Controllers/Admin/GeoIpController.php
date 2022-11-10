@@ -12,8 +12,7 @@ class GeoIpController extends Controller
     {
         $ua = request()->userAgent();
 
-        $ip = request()->ip() != '127.0.0.1'
-            ?: $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ip = request()->ip() != '127.0.0.1' ? request()->ip() : $_SERVER['HTTP_X_FORWARDED_FOR'];
 
         GeoUa::dispatch($ip, $ua)->onQueue('parsing');
 
