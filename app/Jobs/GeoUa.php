@@ -37,13 +37,6 @@ class GeoUa implements ShouldQueue
      */
     public function handle(UserAgentServiceInterface $agentService)
     {
-        $ua = request()->userAgent(); // ти не отримаєш айпішнік ось так у консолі
-//        echo 'ip: '.$this->ip.PHP_EOL;
-//        echo 'agent: '.$this->ua.PHP_EOL;
-//        return;
-        // запусти ще раз код
-        // я вам це на початку урока розповідав, у тебе цей метод запускається консольним скріптом де немає SERVER
-        // і він не може нічого отримати
         $agentService->parse($this->ua); // у тебе тут null приходить, із за того що у тебе намеє айпі
 
         Visit::create([
